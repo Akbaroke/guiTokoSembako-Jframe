@@ -57,6 +57,11 @@ public class Login extends javax.swing.JFrame {
         btnLinkRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-linkRegister.png"))); // NOI18N
         btnLinkRegister.setBorder(null);
         btnLinkRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLinkRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLinkRegisterActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnLinkRegister);
         btnLinkRegister.setBounds(450, 20, 120, 30);
 
@@ -124,6 +129,13 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Oopss...\nData harus diisi dengan benar!", "Gagal", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnLinkRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinkRegisterActionPerformed
+        // TODO add your handling code here:
+        Register register = new Register();
+        this.setVisible(false);
+        register.setVisible(true);
+    }//GEN-LAST:event_btnLinkRegisterActionPerformed
 
     /**
      * @param args the command line arguments

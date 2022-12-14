@@ -34,6 +34,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         }else{
             setIcon();
             initComponents();
+            setHeaderName();
             showTabelBarang();
             showTabelKeranjang();
             hitungKeranjang();
@@ -41,6 +42,26 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         }
     }
     
+    
+    public void setHeaderName(){
+        try {
+            System.out.println(Session.session.getSession());
+            Connection conn = Koneksi.ConnectDB();
+            String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            String namaToko = "null";
+            while(rs.next()){
+                namaToko = rs.getString("nama_toko");
+            }
+            NamaToko.setText(namaToko);
+            NamaToko_struk.setText(namaToko);
+            
+        } catch (SQLException e) {
+            System.out.println("Data barang Gagal di tampilkan...");
+            System.out.println(e);
+        }
+    }
     
     private DefaultTableModel tableModel;
     private ResultSet resultSet;
@@ -226,10 +247,12 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         struk_JumlahUang = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
+        NamaToko = new javax.swing.JLabel();
+        NamaToko_struk = new javax.swing.JLabel();
         struk_KembalianUang = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         struk_TotalBayar = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         strukListValue = new javax.swing.JLabel();
         btnHapus_Keranjang = new javax.swing.JButton();
@@ -633,10 +656,16 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         getContentPane().add(struk_JumlahUang);
         struk_JumlahUang.setBounds(1700, 740, 90, 30);
 
-        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel36.setText("Tanggal   : ");
-        getContentPane().add(jLabel36);
-        jLabel36.setBounds(1500, 500, 60, 20);
+        NamaToko.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        NamaToko.setForeground(new java.awt.Color(255, 255, 255));
+        NamaToko.setText("Toko Sembako");
+        getContentPane().add(NamaToko);
+        NamaToko.setBounds(140, 20, 560, 70);
+
+        NamaToko_struk.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        NamaToko_struk.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(NamaToko_struk);
+        NamaToko_struk.setBounds(1580, 470, 160, 0);
 
         struk_KembalianUang.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         struk_KembalianUang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -654,6 +683,11 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         struk_TotalBayar.setText("Rp 0");
         getContentPane().add(struk_TotalBayar);
         struk_TotalBayar.setBounds(1700, 720, 90, 20);
+
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel38.setText("Tanggal   : ");
+        getContentPane().add(jLabel38);
+        jLabel38.setBounds(1500, 500, 60, 20);
 
         jLabel40.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jLabel40.setText("Jumlah Uang        : ");
@@ -1024,7 +1058,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                                 Statement st = conn.createStatement();
                                 ResultSet rs = st.executeQuery(query);
                                 int idAkhir = 0;
-                                String resKode = null;
+                                String resKode = "";
                                 while(rs.next()){
                                     idAkhir++;
                                     resKode = rs.getString("kode");
@@ -1468,6 +1502,14 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
 
     private void btnRefreshStrukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshStrukActionPerformed
         // TODO add your handling code here:
+        lblRingkasan_Total.setText("0");
+        lblRingkasan_Uang.setText("0");
+        lblRingkasan_Kembalian.setText("0");
+        lblTanggalValue.setText("0/0/0");
+        strukListValue.setText("");
+        struk_TotalBayar.setText("Rp 0");
+        struk_JumlahUang.setText("Rp 0");
+        struk_KembalianUang.setText("Rp 0");
     }//GEN-LAST:event_btnRefreshStrukActionPerformed
 
     public String getTanggal(){
@@ -1549,6 +1591,8 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> FieldCari;
     private javax.swing.JComboBox<String> FilterTabel;
+    private javax.swing.JLabel NamaToko;
+    private javax.swing.JLabel NamaToko_struk;
     private javax.swing.JTable TabelBarang;
     private javax.swing.JTable TabelKeranjang;
     private javax.swing.JButton btnBayar;
@@ -1590,8 +1634,8 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;

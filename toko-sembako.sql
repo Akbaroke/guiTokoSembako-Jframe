@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Des 2022 pada 07.58
--- Versi server: 10.4.25-MariaDB
--- Versi PHP: 8.1.10
+-- Waktu pembuatan: 14 Des 2022 pada 18.05
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,8 +42,10 @@ CREATE TABLE `tb_barang` (
 --
 
 INSERT INTO `tb_barang` (`id`, `user_id`, `kode`, `nama`, `harga`, `stok`, `kategori`) VALUES
-(1, 1, '1MI', 'aqua', 5000, 20, 'Minuman'),
-(2, 3, '1MI', 'aqua', 5000, 20, 'Minuman');
+(1, 1, '1MI', 'aqua', 5000, 10, 'Minuman'),
+(2, 3, '1MI', 'aqua', 5000, 20, 'Minuman'),
+(3, 1, '1MA', 'roti tawar', 8000, 10, 'Makanan'),
+(4, 2, '1MI', 'coca cola', 5000, 17, 'Minuman');
 
 -- --------------------------------------------------------
 
@@ -66,8 +68,10 @@ CREATE TABLE `tb_history` (
 --
 
 INSERT INTO `tb_history` (`id`, `user_id`, `kode`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES
-(1, 1, '1MA', 'sari roti', 4, 7500, '14/12/2022'),
-(2, 1, '1MA', 'sari roti', 1, 7500, '14/12/2022');
+(1, 2, '1MI', 'coca cola', 1, 5000, '14/12/2022'),
+(2, 1, '1MA', 'roti tawar', 1, 8000, '14/12/2022'),
+(3, 1, '1MI', 'aqua', 1, 5000, '14/12/2022'),
+(4, 1, '1MA', 'roti tawar', 4, 8000, '14/12/2022');
 
 -- --------------------------------------------------------
 
@@ -103,7 +107,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`user_id`, `nama_toko`, `username`, `password`, `pendapatan`) VALUES
-(1, 'Cunguk Store', 'akbaroke', 'akbar123', 0),
+(1, 'Cunguk Store', 'akbaroke', 'akbar123', 32000),
 (2, 'Rei Store', 'rei123', 'rei123', 0),
 (3, 'Joko Store', 'joko', 'joko123', 0);
 
@@ -143,19 +147,13 @@ ALTER TABLE `tb_users`
 -- AUTO_INCREMENT untuk tabel `tb_barang`
 --
 ALTER TABLE `tb_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `tb_history`
---
-ALTER TABLE `tb_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_users`

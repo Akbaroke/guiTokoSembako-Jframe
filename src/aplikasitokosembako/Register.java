@@ -4,6 +4,7 @@
  */
 package aplikasitokosembako;
 
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +22,7 @@ public class Register extends javax.swing.JFrame {
      * Creates new form Register
      */
     public Register() {
+        setIcon();
         initComponents();
     }
 
@@ -42,6 +44,7 @@ public class Register extends javax.swing.JFrame {
         bg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("APLIKASI TOKO SEMBAKO");
         setBackground(new java.awt.Color(0, 0, 0));
         getContentPane().setLayout(null);
 
@@ -211,5 +214,9 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword_register;
     private javax.swing.JTextField txtUsername_register;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../assets/icon-apk.png")));
+    }
 }
 

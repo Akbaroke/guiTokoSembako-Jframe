@@ -43,7 +43,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
     }
     
     
-    public void setHeaderName(){
+    public final void setHeaderName(){
         try {
             System.out.println(Session.session.getSession());
             Connection conn = Koneksi.ConnectDB();
@@ -56,7 +56,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             }
             NamaToko.setText(namaToko);
             NamaToko_struk.setText(namaToko);
-            
+            namaToko_struk.setText(namaToko);
         } catch (SQLException e) {
             System.out.println("Data barang Gagal di tampilkan...");
             System.out.println(e);
@@ -66,6 +66,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
     private ResultSet resultSet;
     public final void showTabelBarang(){
+        
         try {
             Connection conn = Koneksi.ConnectDB();
             
@@ -254,8 +255,16 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         struk_TotalBayar = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
-        strukListValue = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        harga_listStruk = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        nama_listStruk = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jumlah_listStruk = new javax.swing.JTextArea();
         btnHapus_Keranjang = new javax.swing.JButton();
+        namaToko_struk = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         btnRefreshTransaksi = new javax.swing.JButton();
         btnRefreshStruk = new javax.swing.JButton();
         btnBayar = new javax.swing.JButton();
@@ -307,6 +316,8 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         TabelKeranjang.setToolTipText("");
         TabelKeranjang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         TabelKeranjang.setRowHeight(25);
+        TabelKeranjang.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        TabelKeranjang.setSelectionForeground(new java.awt.Color(1, 1, 1));
         TabelKeranjang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 TabelKeranjangMousePressed(evt);
@@ -428,6 +439,9 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         getContentPane().add(txtKode_Keranjang);
         txtKode_Keranjang.setBounds(880, 480, 160, 30);
 
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setBorder(null);
+
         TabelBarang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         TabelBarang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -457,7 +471,10 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             }
         });
         TabelBarang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TabelBarang.setGridColor(new java.awt.Color(204, 204, 204));
         TabelBarang.setRowHeight(25);
+        TabelBarang.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        TabelBarang.setSelectionForeground(new java.awt.Color(1, 1, 1));
         TabelBarang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 TabelBarangMousePressed(evt);
@@ -694,9 +711,63 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         getContentPane().add(jLabel40);
         jLabel40.setBounds(1500, 740, 120, 30);
 
-        strukListValue.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(strukListValue);
-        strukListValue.setBounds(1500, 570, 290, 130);
+        jScrollPane5.setBorder(null);
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        harga_listStruk.setEditable(false);
+        harga_listStruk.setBackground(new java.awt.Color(255, 255, 255));
+        harga_listStruk.setColumns(20);
+        harga_listStruk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        harga_listStruk.setRows(20);
+        harga_listStruk.setToolTipText("");
+        harga_listStruk.setWrapStyleWord(true);
+        harga_listStruk.setBorder(null);
+        harga_listStruk.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        harga_listStruk.setSelectionColor(new java.awt.Color(255, 255, 102));
+        jScrollPane5.setViewportView(harga_listStruk);
+
+        getContentPane().add(jScrollPane5);
+        jScrollPane5.setBounds(1710, 560, 80, 150);
+
+        jScrollPane4.setBorder(null);
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        nama_listStruk.setColumns(20);
+        nama_listStruk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nama_listStruk.setRows(20);
+        nama_listStruk.setToolTipText("");
+        nama_listStruk.setWrapStyleWord(true);
+        nama_listStruk.setBorder(null);
+        nama_listStruk.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        nama_listStruk.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jScrollPane4.setViewportView(nama_listStruk);
+
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(1570, 560, 130, 150);
+
+        jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jumlah_listStruk.setEditable(false);
+        jumlah_listStruk.setBackground(new java.awt.Color(255, 255, 255));
+        jumlah_listStruk.setColumns(20);
+        jumlah_listStruk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jumlah_listStruk.setRows(20);
+        jumlah_listStruk.setToolTipText("");
+        jumlah_listStruk.setWrapStyleWord(true);
+        jumlah_listStruk.setBorder(null);
+        jumlah_listStruk.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jumlah_listStruk.setSelectionColor(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setViewportView(jumlah_listStruk);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(1500, 560, 50, 150);
 
         btnHapus_Keranjang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-hapus_2.png"))); // NOI18N
         btnHapus_Keranjang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -707,6 +778,32 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         });
         getContentPane().add(btnHapus_Keranjang);
         btnHapus_Keranjang.setBounds(870, 770, 80, 30);
+
+        namaToko_struk.setFont(new java.awt.Font("Segoe Script", 1, 18)); // NOI18N
+        namaToko_struk.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        namaToko_struk.setText("Cunguk Store");
+        getContentPane().add(namaToko_struk);
+        namaToko_struk.setBounds(1550, 470, 230, 30);
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-profile.png"))); // NOI18N
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(1690, 50, 80, 40);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-logout.png"))); // NOI18N
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(1790, 50, 80, 40);
 
         btnRefreshTransaksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-refresh.png"))); // NOI18N
         btnRefreshTransaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1419,12 +1516,28 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                     lblRingkasan_Uang.setText(RupiahFromat(Integer.parseInt(uang)));
                     int kembalian = Integer.parseInt(uang)-KeranjangTotalBayar;
                     lblRingkasan_Kembalian.setText(RupiahFromat(kembalian));
-                    JOptionPane.showMessageDialog(rootPane, "Berhasil... \nPembayaran Berhasil\nKeranjang akan dikosongkan!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
                     txtJumlahUang_Bayar.setText("");
                     totalKeranjang.setText("0");
                     totalKeranjang_Pembayaran.setText("0");
                     try {
                         Connection conn = Koneksi.ConnectDB();
+                        
+                        String qrry = "SELECT * FROM tb_history";
+                        Statement st = conn.createStatement();
+                        ResultSet rs = st.executeQuery(qrry);
+                        String id = "";
+                        int count = 0;
+                        while(rs.next()){
+                            id = rs.getString("id");
+                            count ++;
+                        }
+                        
+                        if(count == 0){
+                            id = "1";
+                        }else{
+                            int setId = Integer.parseInt(id) + 1;
+                            id = Integer.toString(setId);
+                        }
                         
                         String qry = "SELECT * FROM tb_keranjang WHERE user_id='"+Session.session.getSession()+"'";
                         Statement sst = conn.createStatement();
@@ -1435,14 +1548,30 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                             String harga = rrs.getString("harga");
                             String jumlah = rrs.getString("jumlah");
                             String tanggal = getTanggal();
-                            String delete = "INSERT INTO `tb_history`(`user_id`, `kode`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES ('"+Session.session.getSession()+"','"+kode+"','"+nama+"','"+jumlah+"','"+harga+"','"+tanggal+"')";
-                            PreparedStatement prs = conn.prepareStatement(delete);
+                            String insrt = "INSERT INTO `tb_history` (`id`, `user_id`, `kode`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES ('"+id+"','"+Session.session.getSession()+"','"+kode+"','"+nama+"','"+jumlah+"','"+harga+"','"+tanggal+"')";
+                            PreparedStatement prs = conn.prepareStatement(insrt);
                             prs.execute();
                         }
                         
                         String delete = "DELETE FROM `tb_keranjang` WHERE user_id='"+Session.session.getSession()+"'";
                         PreparedStatement prs = conn.prepareStatement(delete);
                         prs.execute();
+                        
+                        String qr = "SELECT * FROM `tb_users` WHERE user_id='"+Session.session.getSession()+"'";
+                        Statement stt = conn.createStatement();
+                        ResultSet rss = stt.executeQuery(qr);
+                        String pendapatan = "0";
+                        while(rss.next()){
+                            pendapatan = rss.getString("pendapatan");
+                        }
+                        String totalBayar = lblRingkasan_Total.getText().replace(".", "");
+                        int totalPen = Integer.parseInt(pendapatan) + Integer.parseInt(totalBayar);
+                        String updt = "UPDATE `tb_users` SET `pendapatan`='"+totalPen+"' WHERE user_id='"+Session.session.getSession()+"'";
+                        PreparedStatement pr = conn.prepareStatement(updt);
+                        pr.execute();
+                        
+                        JOptionPane.showMessageDialog(rootPane, "Berhasil... \nPembayaran Berhasil\nKeranjang akan dikosongkan!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+                        
                     } catch (SQLException e) {
                         JOptionPane.showMessageDialog(rootPane, "Oopss...\nPermintaan ditolak!", "Gagal", JOptionPane.ERROR_MESSAGE);
                         System.out.println(e);
@@ -1496,20 +1625,19 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSimban_UbahKeranjangActionPerformed
 
-    private void txtJumlah_UbahKeranjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJumlah_UbahKeranjangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtJumlah_UbahKeranjangActionPerformed
-
     private void btnRefreshStrukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshStrukActionPerformed
         // TODO add your handling code here:
         lblRingkasan_Total.setText("0");
         lblRingkasan_Uang.setText("0");
         lblRingkasan_Kembalian.setText("0");
         lblTanggalValue.setText("0/0/0");
-        strukListValue.setText("");
+        jumlah_listStruk.setText("");
         struk_TotalBayar.setText("Rp 0");
         struk_JumlahUang.setText("Rp 0");
         struk_KembalianUang.setText("Rp 0");
+        harga_listStruk.setText("");
+        nama_listStruk.setText("");
+        jumlah_listStruk.setText("");
     }//GEN-LAST:event_btnRefreshStrukActionPerformed
 
     public String getTanggal(){
@@ -1538,12 +1666,24 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                 String qry = "SELECT * FROM tb_history WHERE user_id='"+Session.session.getSession()+"'";
                 Statement sst = conn.createStatement();
                 ResultSet rrs = sst.executeQuery(qry);
+                String jumlahRes = "";
+                String namaRes = "";
+                String hargaRes = "";
                 while(rrs.next()){
-                    String nama = rrs.getString("nama");
-                    String harga = rrs.getString("harga");
                     String jumlah = rrs.getString("jumlah");
-                    String test = String.format("%5s %25s %45s", jumlah,nama,"Rp "+RupiahFromat(Integer.parseInt(harga)));
-                    strukListValue.setText(test);
+                    jumlahRes +=  jumlah + "\n";
+                    
+                    String nama = rrs.getString("nama");
+                    namaRes +=  nama + "\n";
+                   
+                    String harga = rrs.getString("harga");
+                    hargaRes +=  String.format("%5s", "Rp "+RupiahFromat(Integer.parseInt(harga))+"\n");
+                    
+//                    listData += String.format("%5s %20s %30s", jumlah,nama,"Rp "+RupiahFromat(Integer.parseInt(harga))) + "\n";
+                    System.out.println(jumlah+" "+nama+" "+harga);
+                    jumlah_listStruk.append(jumlahRes);
+                    nama_listStruk.append(namaRes);
+                    harga_listStruk.append(hargaRes);
                 }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(rootPane, "Oopss...\nData ditolak!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -1552,6 +1692,33 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnPrintActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        int Pilih = JOptionPane.showConfirmDialog(rootPane,"Yakin ingin logout?","Konfirmasi",JOptionPane.OK_CANCEL_OPTION);
+        if(Pilih == JOptionPane.OK_OPTION){
+            //set session
+            Session.session.setSession(null);
+            Login login = new Login();
+            this.setVisible(false);
+            login.setVisible(true);
+            
+        }else if(Pilih == JOptionPane.CANCEL_OPTION){
+            RefreshTampilanTransaksi();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Profile profile = new Profile();
+        this.setVisible(false);
+        profile.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtJumlah_UbahKeranjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJumlah_UbahKeranjangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtJumlah_UbahKeranjangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1587,6 +1754,8 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> FieldCari;
@@ -1609,6 +1778,9 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
     private javax.swing.JButton btnSimpan_Tambah;
     private javax.swing.JButton btnSimpan_UbahBarang;
     private javax.swing.JComboBox<String> cmbKategori_Tambah;
+    private javax.swing.JTextArea harga_listStruk;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1642,13 +1814,18 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTextArea jumlah_listStruk;
     private javax.swing.JLabel lblKode_Ubah;
     private javax.swing.JLabel lblKode_UbahKeranjang;
     private javax.swing.JLabel lblRingkasan_Kembalian;
     private javax.swing.JLabel lblRingkasan_Total;
     private javax.swing.JLabel lblRingkasan_Uang;
     private javax.swing.JLabel lblTanggalValue;
-    private javax.swing.JLabel strukListValue;
+    private javax.swing.JLabel namaToko_struk;
+    private javax.swing.JTextArea nama_listStruk;
     private javax.swing.JLabel struk_JumlahUang;
     private javax.swing.JLabel struk_KembalianUang;
     private javax.swing.JLabel struk_TotalBayar;

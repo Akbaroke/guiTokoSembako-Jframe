@@ -4,6 +4,7 @@
  */
 package aplikasitokosembako;
 
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
+        setIcon();
         initComponents();
     }
 
@@ -39,6 +41,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("APLIKASI TOKO SEMBAKO");
         getContentPane().setLayout(null);
 
         btnLogin.setBackground(new java.awt.Color(0, 0, 0));
@@ -179,4 +182,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword_login;
     private javax.swing.JTextField txtUsername_login;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../assets/icon-apk.png")));
+    }
 }

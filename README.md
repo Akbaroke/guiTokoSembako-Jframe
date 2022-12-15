@@ -1,7 +1,7 @@
 # guiTokoSembako-Jframe
 Aplikasi Toko Sembako Dengan Jframe Netbeans14
 
-<br><br>
+<br>
 
 ## Mengunduh Repository
 Unduh repository ke dalam komputer menggunakan perintah `git clone`.

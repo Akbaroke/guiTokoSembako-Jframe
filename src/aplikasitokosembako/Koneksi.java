@@ -25,7 +25,7 @@ public class Koneksi {
             connect = DriverManager.getConnection(DB, user, pass);
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Koneksi Database tidak tersambung..\nHarap aktifkan XAMPP MYSQL anda!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Koneksi Database tidak tersambung...", "Error", JOptionPane.ERROR_MESSAGE);
             System.err.println(e.getMessage());
             System.exit(0);
         }

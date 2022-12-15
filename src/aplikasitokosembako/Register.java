@@ -82,7 +82,9 @@ public class Register extends javax.swing.JFrame {
         getContentPane().add(txtPassword_register);
         txtPassword_register.setBounds(140, 490, 320, 30);
 
+        btnRegister.setBackground(new java.awt.Color(0, 0, 0));
         btnRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-register.png"))); // NOI18N
+        btnRegister.setBorder(null);
         btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +92,7 @@ public class Register extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRegister);
-        btnRegister.setBounds(150, 700, 300, 40);
+        btnRegister.setBounds(180, 700, 250, 40);
 
         btnLinkLogin.setBackground(new java.awt.Color(0, 0, 0));
         btnLinkLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-linkLogin.png"))); // NOI18N

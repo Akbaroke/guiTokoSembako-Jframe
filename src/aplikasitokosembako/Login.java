@@ -54,7 +54,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogin);
-        btnLogin.setBounds(140, 500, 300, 40);
+        btnLogin.setBounds(180, 500, 250, 40);
 
         btnLinkRegister.setBackground(new java.awt.Color(0, 0, 0));
         btnLinkRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-linkRegister.png"))); // NOI18N

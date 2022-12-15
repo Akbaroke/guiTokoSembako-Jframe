@@ -82,9 +82,10 @@ public class Profile extends javax.swing.JFrame {
         pendapatanValue = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtPasswordBaru = new javax.swing.JTextField();
+        btnHapusAkun = new javax.swing.JButton();
         txtNamaToko = new javax.swing.JTextField();
-        txtPasswordLama = new javax.swing.JTextField();
+        txtPasswordBaru = new javax.swing.JPasswordField();
+        txtPasswordLama = new javax.swing.JPasswordField();
         btnLinkHome = new javax.swing.JButton();
         btnUpdatePassword = new javax.swing.JButton();
         btnUpdateNamaToko = new javax.swing.JButton();
@@ -108,9 +109,9 @@ public class Profile extends javax.swing.JFrame {
 
         NamaToko_Profil.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         NamaToko_Profil.setForeground(new java.awt.Color(255, 255, 255));
-        NamaToko_Profil.setText("Cunguk Store");
+        NamaToko_Profil.setText("Nama Toko");
         getContentPane().add(NamaToko_Profil);
-        NamaToko_Profil.setBounds(180, 60, 240, 50);
+        NamaToko_Profil.setBounds(180, 60, 320, 50);
 
         pendapatanValue.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         pendapatanValue.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,10 +130,28 @@ public class Profile extends javax.swing.JFrame {
         jLabel7.setText("Pendapatan : Rp ");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(180, 110, 120, 20);
-        getContentPane().add(txtPasswordBaru);
-        txtPasswordBaru.setBounds(280, 510, 180, 30);
+
+        btnHapusAkun.setBackground(new java.awt.Color(0, 0, 0));
+        btnHapusAkun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-hapusAkun.png"))); // NOI18N
+        btnHapusAkun.setBorder(null);
+        btnHapusAkun.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHapusAkun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusAkunActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnHapusAkun);
+        btnHapusAkun.setBounds(150, 700, 300, 40);
+
+        txtNamaToko.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         getContentPane().add(txtNamaToko);
         txtNamaToko.setBounds(260, 250, 200, 30);
+
+        txtPasswordBaru.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        getContentPane().add(txtPasswordBaru);
+        txtPasswordBaru.setBounds(280, 510, 180, 30);
+
+        txtPasswordLama.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         getContentPane().add(txtPasswordLama);
         txtPasswordLama.setBounds(280, 460, 180, 30);
 
@@ -148,7 +167,9 @@ public class Profile extends javax.swing.JFrame {
         getContentPane().add(btnLinkHome);
         btnLinkHome.setBounds(460, 30, 100, 30);
 
+        btnUpdatePassword.setBackground(new java.awt.Color(0, 0, 0));
         btnUpdatePassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-simpan.png"))); // NOI18N
+        btnUpdatePassword.setBorder(null);
         btnUpdatePassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdatePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,7 +179,9 @@ public class Profile extends javax.swing.JFrame {
         getContentPane().add(btnUpdatePassword);
         btnUpdatePassword.setBounds(240, 570, 90, 30);
 
+        btnUpdateNamaToko.setBackground(new java.awt.Color(0, 0, 0));
         btnUpdateNamaToko.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/btn-simpan.png"))); // NOI18N
+        btnUpdateNamaToko.setBorder(null);
         btnUpdateNamaToko.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdateNamaToko.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,28 +232,47 @@ public class Profile extends javax.swing.JFrame {
         String passwordBaru = txtPasswordBaru.getText();
         
         if(!passwordLama.isEmpty() && !passwordLama.isBlank() && !passwordBaru.isEmpty() && !passwordBaru.isBlank()){
-            if(passwordBaru.length() >= 4){
-                if(!passwordBaru.equals(passwordLama)){
-                    try {
-                        Connection conn = Koneksi.ConnectDB();
-                        String updt = "UPDATE `tb_users` SET `password`='"+passwordBaru+"' WHERE user_id='"+Session.session.getSession()+"'";
-                        PreparedStatement preStmt = conn.prepareStatement(updt);
-                        preStmt.execute();
-                        JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nNama Toko berhasil diubah!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
-                        txtPasswordLama.setText("");
-                        txtPasswordBaru.setText("");
+            try {
+                System.out.println(Session.session.getSession());
+                Connection conn = Koneksi.ConnectDB();
+                String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                String password = "";
+                while(rs.next()){
+                    password = rs.getString("password");
+                }
+                // cek password lama
+                if(password.equals(passwordLama)){
+                    if(passwordBaru.length() >= 4){
+                        if(!passwordBaru.equals(passwordLama)){
+                            try {
+                                String updt = "UPDATE `tb_users` SET `password`='"+passwordBaru+"' WHERE user_id='"+Session.session.getSession()+"'";
+                                PreparedStatement preStmt = conn.prepareStatement(updt);
+                                preStmt.execute();
+                                JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nNama Toko berhasil diubah!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+                                txtPasswordLama.setText("");
+                                txtPasswordBaru.setText("");
 
-                    } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Oopss...\nData ditolak!", "Gagal", JOptionPane.ERROR_MESSAGE);
-                        System.out.println(e);
+                            } catch (SQLException e) {
+                                JOptionPane.showMessageDialog(rootPane, "Oopss...\nData ditolak!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                                System.out.println(e);
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(rootPane, "Oopss...\nPassword baru tidak boleh sama!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                            txtPasswordBaru.setText("");
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(rootPane, "Oopss...\nPassword min.4 karakter!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                        txtPasswordLama.setText("");
                     }
                 }else{
-                    JOptionPane.showMessageDialog(rootPane, "Oopss...\nPassword baru tidak boleh sama!", "Gagal", JOptionPane.ERROR_MESSAGE);
-                    txtPasswordBaru.setText("");
+                    JOptionPane.showMessageDialog(rootPane, "Oopss...\nPassword Lama salah!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                    txtPasswordLama.setText("");
                 }
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Oopss...\nPassword min.4 karakter!!", "Gagal", JOptionPane.ERROR_MESSAGE);
-                txtPasswordLama.setText("");
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(rootPane, "Oopss...\nData ditolak!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                System.out.println(e);
             }
         }else{
             JOptionPane.showMessageDialog(rootPane, "Oopss...\nData harus diisi dengan benar!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -243,6 +285,17 @@ public class Profile extends javax.swing.JFrame {
         this.setVisible(false);
         home.setVisible(true);
     }//GEN-LAST:event_btnLinkHomeActionPerformed
+
+    private void btnHapusAkunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusAkunActionPerformed
+        // TODO add your handling code here:
+        int Pilih = JOptionPane.showConfirmDialog(rootPane,"Yakin ingin hapus akun permanen?\n*semua data akan terhapus secara permanen","Konfirmasi",JOptionPane.OK_CANCEL_OPTION);
+        if(Pilih == JOptionPane.OK_OPTION){
+            System.out.println("oke");
+            
+        }else if(Pilih == JOptionPane.CANCEL_OPTION){
+            System.out.println("no");
+        }
+    }//GEN-LAST:event_btnHapusAkunActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,6 +334,7 @@ public class Profile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel NamaToko_Profil;
+    private javax.swing.JButton btnHapusAkun;
     private javax.swing.JButton btnLinkHome;
     private javax.swing.JButton btnUpdateNamaToko;
     private javax.swing.JButton btnUpdatePassword;
@@ -291,8 +345,8 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel pendapatanValue;
     private javax.swing.JTextField txtNamaToko;
-    private javax.swing.JTextField txtPasswordBaru;
-    private javax.swing.JTextField txtPasswordLama;
+    private javax.swing.JPasswordField txtPasswordBaru;
+    private javax.swing.JPasswordField txtPasswordLama;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {

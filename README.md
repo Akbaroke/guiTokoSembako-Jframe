@@ -1,5 +1,9 @@
 # guiTokoSembako-Jframe
-Aplikasi Toko Sembako Dengan Jframe Netbeans14
+Aplikasi Toko Sembako Dengan Jframe Netbeans14<br>
+***Tech Stack :***
+- java version 19
+- javac version 19
+- netbeans 14
 
 <br>
 

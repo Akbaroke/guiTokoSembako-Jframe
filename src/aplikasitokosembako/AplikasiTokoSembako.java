@@ -38,14 +38,12 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             showTabelBarang();
             showTabelKeranjang();
             hitungKeranjang();
-            System.out.println("Aplikasi Berhasil diJalankan..");
         }
     }
     
     
     public final void setHeaderName(){
         try {
-            System.out.println(Session.session.getSession());
             Connection conn = Koneksi.ConnectDB();
             String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
             Statement st = conn.createStatement();
@@ -1239,7 +1237,6 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                                 resKode = resKode.replace("MI", "");
                                 resKode = resKode.replace("LA", "");
                                 
-                                System.out.println(resKode);
                                 
                                 if(idAkhir == 0){
                                     idAkhir++;

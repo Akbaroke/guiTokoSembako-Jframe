@@ -38,7 +38,6 @@ public class Profile extends javax.swing.JFrame {
     
     public final void setProfilToko(){
         try {
-            System.out.println(Session.session.getSession());
             Connection conn = Koneksi.ConnectDB();
             String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
             Statement st = conn.createStatement();
@@ -233,7 +232,6 @@ public class Profile extends javax.swing.JFrame {
         
         if(!passwordLama.isEmpty() && !passwordLama.isBlank() && !passwordBaru.isEmpty() && !passwordBaru.isBlank()){
             try {
-                System.out.println(Session.session.getSession());
                 Connection conn = Koneksi.ConnectDB();
                 String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
                 Statement st = conn.createStatement();
@@ -291,9 +289,44 @@ public class Profile extends javax.swing.JFrame {
         int Pilih = JOptionPane.showConfirmDialog(rootPane,"Yakin ingin hapus akun permanen?\n*semua data akan terhapus secara permanen","Konfirmasi",JOptionPane.OK_CANCEL_OPTION);
         if(Pilih == JOptionPane.OK_OPTION){
             System.out.println("oke");
+            // hapus data tb_barang
+            try {
+                Connection conn = Koneksi.ConnectDB();
+                String delet1 = "DELETE FROM `tb_barang` WHERE user_id='"+Session.session.getSession()+"'";
+                PreparedStatement preStmt1 = conn.prepareStatement(delet1);
+                preStmt1.execute();
+                
+                String delet2 = "DELETE FROM `tb_history` WHERE user_id='"+Session.session.getSession()+"'";
+                PreparedStatement preStmt2 = conn.prepareStatement(delet2);
+                preStmt2.execute();
+                
+                String delet3 = "DELETE FROM `tb_keranjang` WHERE user_id='"+Session.session.getSession()+"'";
+                PreparedStatement preStmt3 = conn.prepareStatement(delet3);
+                preStmt3.execute();
+                
+                String delet4 = "DELETE FROM `tb_transaksi` WHERE user_id='"+Session.session.getSession()+"'";
+                PreparedStatement preStmt4 = conn.prepareStatement(delet4);
+                preStmt4.execute();
+                
+                String delet5 = "DELETE FROM `tb_users` WHERE user_id='"+Session.session.getSession()+"'";
+                PreparedStatement preStmt5 = conn.prepareStatement(delet5);
+                preStmt5.execute();
+                
+                JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nHapus Akun permanen berhasil!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+                
+                //set session
+                Session.session.setSession(null);
+                Login login = new Login();
+                this.setVisible(false);
+                login.setVisible(true);
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(rootPane, "Oopss...\nData ditolak!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                System.out.println(e);
+            }
             
         }else if(Pilih == JOptionPane.CANCEL_OPTION){
-            System.out.println("no");
+            setProfilToko();
         }
     }//GEN-LAST:event_btnHapusAkunActionPerformed
 

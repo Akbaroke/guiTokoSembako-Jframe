@@ -112,6 +112,9 @@ public class Login extends javax.swing.JFrame {
                 
                 if(userId == null){
                     JOptionPane.showMessageDialog(rootPane, "Oopss...\nUsername tidak diketahui!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                    txtUsername_login.setText("");
+                    txtPassword_login.setText("");
+                    
                 }else{
                     if(password.equals(passwordBase)){
                         //set session
@@ -121,6 +124,7 @@ public class Login extends javax.swing.JFrame {
                         home.setVisible(true);
                     }else{
                         JOptionPane.showMessageDialog(rootPane, "Oopss...\nPassword salah!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                        txtPassword_login.setText("");
                     }
                 }
             } catch (SQLException e) {
@@ -130,6 +134,8 @@ public class Login extends javax.swing.JFrame {
             
         }else{
             JOptionPane.showMessageDialog(rootPane, "Oopss...\nData harus diisi dengan benar!", "Gagal", JOptionPane.ERROR_MESSAGE);
+            txtUsername_login.setText("");
+            txtPassword_login.setText("");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

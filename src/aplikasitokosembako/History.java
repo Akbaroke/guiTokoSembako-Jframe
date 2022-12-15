@@ -86,7 +86,6 @@ public class History extends javax.swing.JFrame {
     
     public final void setProfilToko(){
         try {
-            System.out.println(Session.session.getSession());
             Connection conn = Koneksi.ConnectDB();
             String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
             Statement st = conn.createStatement();
@@ -543,7 +542,6 @@ public class History extends javax.swing.JFrame {
                 };
                 tableModel.addRow(data);
             }
-            System.out.println(txtCari_idhistory.getText());
 
         } catch (SQLException e) {
             System.out.println("Data barang Gagal di tampilkan...");
@@ -582,7 +580,6 @@ public class History extends javax.swing.JFrame {
                 };
                 tableModel.addRow(data);
             }
-            System.out.println(txtCari_idhistory.getText());
 
         } catch (SQLException e) {
             System.out.println("Data barang Gagal di tampilkan...");
@@ -611,7 +608,6 @@ public class History extends javax.swing.JFrame {
                 };
                 tableModel.addRow(data);
             }
-            System.out.println(txtCari_idhistory.getText());
 
         } catch (SQLException e) {
             System.out.println("Data barang Gagal di tampilkan...");
@@ -640,7 +636,6 @@ public class History extends javax.swing.JFrame {
                 };
                 tableModel.addRow(data);
             }
-            System.out.println(txtCari_idhistory.getText());
 
         } catch (SQLException e) {
             System.out.println("Data barang Gagal di tampilkan...");

@@ -140,6 +140,13 @@ public class Register extends javax.swing.JFrame {
                                     PreparedStatement preStmt = conn.prepareStatement(insrt);
                                     preStmt.execute();
                                     JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nSelamat, register anda berhasil!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+                                    txtNamaToko_register.setText("");
+                                    txtUsername_register.setText("");
+                                    txtPassword_register.setText("");
+                                    txtPassword2_register.setText("");
+                                    Login login = new Login();
+                                    this.setVisible(false);
+                                    login.setVisible(true);
                                     
                                 }else{
                                     JOptionPane.showMessageDialog(rootPane, "Oopss...\nMaaf, username sudah terpakai!", "Gagal", JOptionPane.ERROR_MESSAGE);

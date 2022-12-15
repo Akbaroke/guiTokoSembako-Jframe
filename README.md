@@ -42,3 +42,7 @@ Untuk membuka file utama dan membuka Jframe dan Java Class. <br>
     ↳ Koneksi.java
     ↳ Session.java
 ```
+
+<br>
+### Home Page <br>
+![Home](https://user-images.githubusercontent.com/94231436/207862566-7f741d6c-c2fc-4832-a3b6-de789d4a3b10.JPG)

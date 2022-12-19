@@ -106,7 +106,7 @@ public class Login extends javax.swing.JFrame {
                 String userId = null;
                 String passwordBase = null;
                 while(rs.next()){
-                    userId = rs.getString("user_id");
+                    userId = rs.getString("id");
                     passwordBase = rs.getString("password");
                 }
                 

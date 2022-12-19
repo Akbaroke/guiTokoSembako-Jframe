@@ -45,7 +45,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
     public final void setHeaderName(){
         try {
             Connection conn = Koneksi.ConnectDB();
-            String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
+            String query = "SELECT * FROM tb_users WHERE id='"+Session.session.getSession()+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             String namaToko = "null";
@@ -74,7 +74,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             Statement statement = conn.createStatement();
             tableModel.getDataVector().removeAllElements();
             
-            resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"'");
+            resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"'");
             int i = 1;
             while(resultSet.next()){
                 Object[] data = {
@@ -120,12 +120,12 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             Statement statement = conn.createStatement();
             tableModel.getDataVector().removeAllElements();
             
-            resultSet = statement.executeQuery("SELECT * FROM tb_keranjang WHERE user_id='"+Session.session.getSession()+"'");
+            resultSet = statement.executeQuery("SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"'");
             int i = 1;
             while(resultSet.next()){
                 Object[] data = {
                     i++,
-                    resultSet.getString("kode"),
+                    resultSet.getString("kode_barang"),
                     resultSet.getString("nama"),
                     resultSet.getString("harga"),
                     resultSet.getString("jumlah")
@@ -153,7 +153,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
     public final void hitungKeranjang(){
         try {
             Connection conn = Koneksi.ConnectDB();
-            String query = "SELECT * FROM tb_keranjang WHERE user_id='"+Session.session.getSession()+"'";
+            String query = "SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             int resTotal = 0;
@@ -995,7 +995,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                     Statement statement = conn.createStatement();
                     tableModel.getDataVector().removeAllElements();
 
-                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' ORDER BY harga ASC ");
+                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' ORDER BY harga ASC ");
                     int i = 1;
                     while(resultSet.next()){
                         Object[] data = {
@@ -1023,7 +1023,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                     Statement statement = conn.createStatement();
                     tableModel.getDataVector().removeAllElements();
 
-                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' ORDER BY harga DESC");
+                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' ORDER BY harga DESC");
                     int i = 1;
                     while(resultSet.next()){
                         Object[] data = {
@@ -1051,7 +1051,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                     Statement statement = conn.createStatement();
                     tableModel.getDataVector().removeAllElements();
 
-                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' ORDER BY stok ASC");
+                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' ORDER BY stok ASC");
                     int i = 1;
                     while(resultSet.next()){
                         Object[] data = {
@@ -1079,7 +1079,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                     Statement statement = conn.createStatement();
                     tableModel.getDataVector().removeAllElements();
 
-                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kategori='Makanan'");
+                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kategori='Makanan'");
                     int i = 1;
                     while(resultSet.next()){
                         Object[] data = {
@@ -1106,7 +1106,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                     Statement statement = conn.createStatement();
                     tableModel.getDataVector().removeAllElements();
 
-                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kategori='Minuman'");
+                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kategori='Minuman'");
                     int i = 1;
                     while(resultSet.next()){
                         Object[] data = {
@@ -1134,7 +1134,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                     Statement statement = conn.createStatement();
                     tableModel.getDataVector().removeAllElements();
 
-                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kategori='Lain-lain'");
+                    resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kategori='Lain-lain'");
                     int i = 1;
                     while(resultSet.next()){
                         Object[] data = {
@@ -1181,7 +1181,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                 Statement statement = conn.createStatement();
                 tableModel.getDataVector().removeAllElements();
 
-                resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND "+FieldCari.getSelectedItem()+" LIKE '%"+txtCariBarang.getText()+"%'");
+                resultSet = statement.executeQuery("SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND "+FieldCari.getSelectedItem()+" LIKE '%"+txtCariBarang.getText()+"%'");
                 int i = 1;
                 while(resultSet.next()){
                     Object[] data = {
@@ -1222,7 +1222,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                             // generate kode barang
                             try {
                                 Connection conn = Koneksi.ConnectDB();
-                                String query = "SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kategori='"+ kategori+"'";
+                                String query = "SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kategori='"+ kategori+"'";
                                 Statement st = conn.createStatement();
                                 ResultSet rs = st.executeQuery(query);
                                 int idAkhir = 0;
@@ -1252,7 +1252,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                                     kodeBarang = idAkhir + "LA";
                                 }
                                 
-                                String insrt = "INSERT INTO `tb_barang`(`user_id`, `kode`, `nama`, `harga`, `stok`, `kategori`) VALUES ('"+Session.session.getSession()+"','"+kodeBarang+"','"+nama+"','"+harga+"','"+stok+"','"+kategori+"')";
+                                String insrt = "INSERT INTO `tb_barang`(`kode`, `id_user`, `nama`, `harga`, `stok`, `kategori`) VALUES ('"+kodeBarang+"','"+Session.session.getSession()+"','"+nama+"','"+harga+"','"+stok+"','"+kategori+"')";
                                 PreparedStatement preStmt = conn.prepareStatement(insrt);
                                 preStmt.execute();
                                 JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nBarang berhasil ditambahkan!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
@@ -1285,7 +1285,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         
         try {
             Connection conn = Koneksi.ConnectDB();
-            String query = "SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kode='"+ txtKode_Hapus.getText() +"'";
+            String query = "SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kode='"+ txtKode_Hapus.getText() +"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             String resNama = null;
@@ -1299,7 +1299,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             }else{
                 int Pilih = JOptionPane.showConfirmDialog(rootPane,"Yakin akan menghapus data ini ?\nKode  :  "+txtKode_Hapus.getText()+"\nNama  :  "+resNama+"\n\n","Konfirmasi",JOptionPane.OK_CANCEL_OPTION);
                 if(Pilih == JOptionPane.OK_OPTION){
-                    String delete = "DELETE FROM `tb_barang` WHERE user_id='"+Session.session.getSession()+"' AND kode='"+ txtKode_Hapus.getText() +"'";
+                    String delete = "DELETE FROM `tb_barang` WHERE id_user='"+Session.session.getSession()+"' AND kode='"+ txtKode_Hapus.getText() +"'";
                     PreparedStatement prs = conn.prepareStatement(delete);
                     prs.execute();
                     JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nBarang berhasil diHapus!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
@@ -1347,7 +1347,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                                 // generate kode barang
                                 try {
                                     Connection conn = Koneksi.ConnectDB();
-                                    String insrt = "UPDATE `tb_barang` SET `nama`='"+nama+"',`harga`='"+harga+"',`stok`='"+stok+"' WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+kodeUbahBarang+"'";
+                                    String insrt = "UPDATE `tb_barang` SET `nama`='"+nama+"',`harga`='"+harga+"',`stok`='"+stok+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+kodeUbahBarang+"'";
                                     PreparedStatement preStmt = conn.prepareStatement(insrt);
                                     preStmt.execute();
                                     JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nBarang berhasil diubah!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
@@ -1384,7 +1384,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         try {
             if(!kode.isEmpty() && !kode.isBlank() && !jumlah.isEmpty() && !jumlah.isBlank()){
                 Connection conn = Koneksi.ConnectDB();
-                String query = "SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kode='"+kode+"'";
+                String query = "SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kode='"+kode+"'";
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery(query);
                 String resKode = null;
@@ -1406,7 +1406,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(rootPane, "Oopss...\nJumlah melebihi stok barang!", "Gagal", JOptionPane.ERROR_MESSAGE);
                         }else{
                             if(jumlah.matches("\\d+")){
-                                String queryy = "SELECT * FROM tb_keranjang WHERE user_id='"+Session.session.getSession()+"' AND kode='"+resKode+"'";
+                                String queryy = "SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"' AND kode_barang='"+resKode+"'";
                                 Statement stt = conn.createStatement();
                                 ResultSet rss = stt.executeQuery(queryy);
                                 String ressKode = null;
@@ -1417,31 +1417,31 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                                 }
                                 if(Integer.parseInt(jumlah) > 0){
                                     if(ressKode == null){
-                                        String insrt = "INSERT INTO `tb_keranjang`(`user_id`, `kode`, `nama`, `harga`, `jumlah`) VALUES ('"+Session.session.getSession()+"','"+resKode+"','"+resNama+"','"+resHarga+"','"+jumlah+"')";
+                                        String insrt = "INSERT INTO `tb_keranjang`(`id_user`, `kode_barang`, `nama`, `harga`, `jumlah`) VALUES ('"+Session.session.getSession()+"','"+resKode+"','"+resNama+"','"+resHarga+"','"+jumlah+"')";
                                         PreparedStatement preStmt = conn.prepareStatement(insrt);
                                         preStmt.execute();
 
-                                        String qry = "SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kode='"+resKode+"'";
+                                        String qry = "SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kode='"+resKode+"'";
                                         Statement sst = conn.createStatement();
                                         ResultSet rrs = sst.executeQuery(qry);
                                         while(rrs.next()){
                                             int rrsStok = Integer.parseInt(rrs.getString("stok"));
-                                            String updt = "UPDATE `tb_barang` SET `stok`='"+(rrsStok-Integer.parseInt(jumlah))+"' WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+resKode+"'";
+                                            String updt = "UPDATE `tb_barang` SET `stok`='"+(rrsStok-Integer.parseInt(jumlah))+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+resKode+"'";
                                             PreparedStatement pr = conn.prepareStatement(updt);
                                             pr.execute();
                                         }
 
                                     }else{
-                                        String updt = "UPDATE `tb_keranjang` SET `jumlah`='"+(Integer.parseInt(ressJumlah)+Integer.parseInt(jumlah))+"' WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+resKode+"'";
+                                        String updt = "UPDATE `tb_keranjang` SET `jumlah`='"+(Integer.parseInt(ressJumlah)+Integer.parseInt(jumlah))+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode_barang`='"+resKode+"'";
                                         PreparedStatement preStmt = conn.prepareStatement(updt);
                                         preStmt.execute();
 
-                                        String qry = "SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kode='"+resKode+"'";
+                                        String qry = "SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kode='"+resKode+"'";
                                         Statement sst = conn.createStatement();
                                         ResultSet rrs = sst.executeQuery(qry);
                                         while(rrs.next()){
                                             int rrsStok = Integer.parseInt(rrs.getString("stok"));
-                                            String upd = "UPDATE `tb_barang` SET `stok`='"+(rrsStok-Integer.parseInt(jumlah))+"' WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+resKode+"'";
+                                            String upd = "UPDATE `tb_barang` SET `stok`='"+(rrsStok-Integer.parseInt(jumlah))+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+resKode+"'";
                                             PreparedStatement pr = conn.prepareStatement(upd);
                                             pr.execute();
                                         }
@@ -1483,26 +1483,26 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             if(Pilih == JOptionPane.OK_OPTION){
                 Connection conn = Koneksi.ConnectDB();
                 
-                String query = "SELECT * FROM tb_keranjang WHERE user_id='"+Session.session.getSession()+"'";
+                String query = "SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"'";
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery(query);
                 while(rs.next()){
                     int resJumlah = Integer.parseInt(rs.getString("jumlah"));
-                    String resKode = rs.getString("kode");
+                    String resKode = rs.getString("kode_barang");
 
-                    String queryy = "SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kode='"+resKode+"'";
+                    String queryy = "SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kode='"+resKode+"'";
                     Statement stt = conn.createStatement();
                     ResultSet rss = stt.executeQuery(queryy);
                     while(rss.next()){
                         int resStok = Integer.parseInt(rss.getString("stok"));
 
-                        String updt = "UPDATE `tb_barang` SET `stok`='"+(resStok+resJumlah)+"' WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+resKode+"'";
+                        String updt = "UPDATE `tb_barang` SET `stok`='"+(resStok+resJumlah)+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+resKode+"'";
                         PreparedStatement preStmt = conn.prepareStatement(updt);
                         preStmt.execute();
                     }
                 }
                 
-                String delete = "DELETE FROM `tb_keranjang` WHERE user_id='"+Session.session.getSession()+"'";
+                String delete = "DELETE FROM `tb_keranjang` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement prs = conn.prepareStatement(delete);
                 prs.execute();
                 JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nKeranjang berhasil diHapus!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
@@ -1533,7 +1533,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             Connection conn = Koneksi.ConnectDB();
-            String query = "SELECT * FROM tb_keranjang WHERE user_id='"+Session.session.getSession()+"' AND kode='"+ txtKode_KeranjangHapus.getText() +"'";
+            String query = "SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"' AND kode_barang='"+ txtKode_KeranjangHapus.getText() +"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             String resNama = null;
@@ -1549,16 +1549,16 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             }else{
                 int Pilih = JOptionPane.showConfirmDialog(rootPane,"Yakin akan menghapus data keranjang ini ?\nKode  :  "+txtKode_KeranjangHapus.getText()+"\nNama  :  "+resNama+"\nJumlah  :  "+resJumlah+"\n\n","Konfirmasi",JOptionPane.OK_CANCEL_OPTION);
                 if(Pilih == JOptionPane.OK_OPTION){
-                    String delete = "DELETE FROM `tb_keranjang` WHERE user_id='"+Session.session.getSession()+"' AND kode='"+ txtKode_KeranjangHapus.getText() +"'";
+                    String delete = "DELETE FROM `tb_keranjang` WHERE id_user='"+Session.session.getSession()+"' AND kode_barang='"+ txtKode_KeranjangHapus.getText() +"'";
                     PreparedStatement prs = conn.prepareStatement(delete);
                     prs.execute();
                     
-                    String qry = "SELECT * FROM tb_barang WHERE user_id='"+Session.session.getSession()+"' AND kode='"+txtKode_KeranjangHapus.getText()+"'";
+                    String qry = "SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kode='"+txtKode_KeranjangHapus.getText()+"'";
                     Statement sst = conn.createStatement();
                     ResultSet rrs = sst.executeQuery(qry);
                     while(rrs.next()){
                         int rrsStok = Integer.parseInt(rrs.getString("stok"));
-                        String upd = "UPDATE `tb_barang` SET `stok`='"+(rrsStok+Integer.parseInt(resJumlah))+"' WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+txtKode_KeranjangHapus.getText()+"'";
+                        String upd = "UPDATE `tb_barang` SET `stok`='"+(rrsStok+Integer.parseInt(resJumlah))+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+txtKode_KeranjangHapus.getText()+"'";
                         PreparedStatement pr = conn.prepareStatement(upd);
                         pr.execute();
                     }
@@ -1593,7 +1593,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                     try {
                         Connection conn = Koneksi.ConnectDB();
                         
-                        String qrry = "SELECT * FROM tb_transaksi WHERE user_id='"+Session.session.getSession()+"'";
+                        String qrry = "SELECT * FROM tb_transaksi WHERE id_user='"+Session.session.getSession()+"'";
                         Statement st = conn.createStatement();
                         ResultSet rs = st.executeQuery(qrry);
                         int count = 0;
@@ -1609,13 +1609,12 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                             idTransaksi = Integer.toString(setId);
                         }
                         
-                        String qry = "SELECT * FROM tb_keranjang WHERE user_id='"+Session.session.getSession()+"'";
+                        String qry = "SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"'";
                         Statement sst = conn.createStatement();
                         ResultSet rrs = sst.executeQuery(qry);
                         int JumlahBarang = 0;
                         String ListBarang = "";
                         while(rrs.next()){
-                            String kode = rrs.getString("kode");
                             String nama = rrs.getString("nama");
                             String harga = rrs.getString("harga");
                             String jumlah = rrs.getString("jumlah");
@@ -1626,16 +1625,16 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                             }
                             JumlahBarang += Integer.parseInt(jumlah);
                             String tanggal = getTanggal();
-                            String insrt = "INSERT INTO `tb_transaksi` (`id_transaksi`, `user_id`, `kode`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES ('"+idTransaksi+"','"+Session.session.getSession()+"','"+kode+"','"+nama+"','"+jumlah+"','"+harga+"','"+tanggal+"')";
+                            String insrt = "INSERT INTO `tb_transaksi` (`id_keranjang`, `id_user`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES ('"+idTransaksi+"','"+Session.session.getSession()+"','"+nama+"','"+jumlah+"','"+harga+"','"+tanggal+"')";
                             PreparedStatement prs = conn.prepareStatement(insrt);
                             prs.execute();
                         }
                         
-                        String delete = "DELETE FROM `tb_keranjang` WHERE user_id='"+Session.session.getSession()+"'";
+                        String delete = "DELETE FROM `tb_keranjang` WHERE id_user='"+Session.session.getSession()+"'";
                         PreparedStatement prs = conn.prepareStatement(delete);
                         prs.execute();
                         
-                        String qr = "SELECT * FROM `tb_users` WHERE user_id='"+Session.session.getSession()+"'";
+                        String qr = "SELECT * FROM `tb_users` WHERE id='"+Session.session.getSession()+"'";
                         Statement stt = conn.createStatement();
                         ResultSet rss = stt.executeQuery(qr);
                         String pendapatan = "0";
@@ -1644,7 +1643,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                         }
                         String totalBayar = lblRingkasan_Total.getText().replace(".", "");
                         int totalPen = Integer.parseInt(pendapatan) + Integer.parseInt(totalBayar);
-                        String updt = "UPDATE `tb_users` SET `pendapatan`='"+totalPen+"' WHERE user_id='"+Session.session.getSession()+"'";
+                        String updt = "UPDATE `tb_users` SET `pendapatan`='"+totalPen+"' WHERE id='"+Session.session.getSession()+"'";
                         PreparedStatement pr = conn.prepareStatement(updt);
                         pr.execute();
                         
@@ -1659,7 +1658,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                         id_transaksi = id_transaksi.replace("/", "");
                         
                         // insert history
-                        String insHistory = "INSERT INTO `tb_history`(`id_history`, `id_transaksi`, `user_id`, `list_barang`, `jumlah_barang`, `total_tagihan`, `jumlah_uang`, `kembalian`, `tanggal`) VALUES ('"+id_transaksi+"','"+idTransaksi+"','"+Session.session.getSession()+"','"+ListBarang+"','"+JumlahBarang+"','"+KeranjangTotalBayar+"','"+uang+"','"+kembalian+"','"+getTanggal()+"')";
+                        String insHistory = "INSERT INTO `tb_history`(`id`, `id_transaksi`, `id_user`, `list_barang`, `jumlah_barang`, `total_tagihan`, `jumlah_uang`, `kembalian_uang`, `tanggal`) VALUES ('"+id_transaksi+"','"+idTransaksi+"','"+Session.session.getSession()+"','"+ListBarang+"','"+JumlahBarang+"','"+KeranjangTotalBayar+"','"+uang+"','"+kembalian+"','"+getTanggal()+"')";
                         PreparedStatement pre = conn.prepareStatement(insHistory);
                         pre.execute();
                         
@@ -1697,7 +1696,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                         try {
                             Connection conn = Koneksi.ConnectDB();
                             // cek barang di stok
-                            String qr1 = "SELECT * FROM `tb_barang` WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
+                            String qr1 = "SELECT * FROM `tb_barang` WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
                             Statement st1 = conn.createStatement();
                             ResultSet rs1 = st1.executeQuery(qr1);
                             String stokBarang = "0";
@@ -1706,7 +1705,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                             }
                             
                             //cek jumlah keranjang
-                            String qr2 = "SELECT * FROM `tb_keranjang` WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
+                            String qr2 = "SELECT * FROM `tb_keranjang` WHERE id_user='"+Session.session.getSession()+"' AND `kode_barang`='"+kode+"'";
                             Statement st2 = conn.createStatement();
                             ResultSet rs2 = st2.executeQuery(qr2);
                             String jumlahKeranjang = "0";
@@ -1718,30 +1717,39 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                                 int selisih = Integer.parseInt(jumlah) - Integer.parseInt(jumlahKeranjang);
                                 if(Integer.parseInt(stokBarang) < selisih){
                                     JOptionPane.showMessageDialog(rootPane, "Oopss...\nStok barang tidak mencukupi jumlah yang ditambah ke keranjang!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                                    System.out.println("a");
                                 }else{
                                     int hitung = Integer.parseInt(stokBarang) - selisih;
-                                    String updt = "UPDATE `tb_barang` SET `stok`='"+hitung+"' WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
+                                    String updt = "UPDATE `tb_barang` SET `stok`='"+hitung+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
                                     PreparedStatement preSt = conn.prepareStatement(updt);
                                     preSt.execute();
+                                    
+                                    String insrt = "UPDATE `tb_keranjang` SET `jumlah`='"+jumlah+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode_barang`='"+kode+"'";
+                                    PreparedStatement preStmt = conn.prepareStatement(insrt);
+                                    preStmt.execute();
+                                    JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nKeranjang berhasil diubah!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+                                    RefreshTampilanTransaksi();
+                                    RefreshTampilanAdmin();
                                 }
                             }else if(Integer.parseInt(jumlah) < Integer.parseInt(jumlahKeranjang)){
                                 int selisih = Integer.parseInt(jumlahKeranjang) - Integer.parseInt(jumlah);
-                                if(Integer.parseInt(stokBarang) < selisih){
+                                if(Integer.parseInt(stokBarang) > selisih){
                                     JOptionPane.showMessageDialog(rootPane, "Oopss...\nStok barang tidak mencukupi jumlah yang ditambah ke keranjang!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                                    System.out.println("b");
                                 }else{
                                     int hitung = Integer.parseInt(stokBarang) + selisih;
-                                    String updt = "UPDATE `tb_barang` SET `stok`='"+hitung+"' WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
+                                    String updt = "UPDATE `tb_barang` SET `stok`='"+hitung+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
                                     PreparedStatement preSt = conn.prepareStatement(updt);
                                     preSt.execute();
+                                    
+                                    String insrt = "UPDATE `tb_keranjang` SET `jumlah`='"+jumlah+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode_barang`='"+kode+"'";
+                                    PreparedStatement preStmt = conn.prepareStatement(insrt);
+                                    preStmt.execute();
+                                    JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nKeranjang berhasil diubah!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+                                    RefreshTampilanTransaksi();
+                                    RefreshTampilanAdmin();
                                 }
                             }
-                            
-                            String insrt = "UPDATE `tb_keranjang` SET `jumlah`='"+jumlah+"' WHERE user_id='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
-                            PreparedStatement preStmt = conn.prepareStatement(insrt);
-                            preStmt.execute();
-                            JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nKeranjang berhasil diubah!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
-                            RefreshTampilanTransaksi();
-                            RefreshTampilanAdmin();
 
                         } catch (SQLException e) {
                             JOptionPane.showMessageDialog(rootPane, "Oopss...\nData ditolak!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -1797,7 +1805,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
 
             try {
                 Connection conn = Koneksi.ConnectDB();
-                String qry = "SELECT * FROM tb_transaksi WHERE user_id='"+Session.session.getSession()+"' AND id_transaksi='"+idTransaksi+"' AND tanggal='"+getTanggal()+"'";
+                String qry = "SELECT * FROM tb_transaksi WHERE id_user='"+Session.session.getSession()+"' AND id_keranjang='"+idTransaksi+"' AND tanggal='"+getTanggal()+"'";
                 Statement sst = conn.createStatement();
                 ResultSet rrs = sst.executeQuery(qry);
                 String jumlahRes = "";

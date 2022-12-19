@@ -55,12 +55,12 @@ public class History extends javax.swing.JFrame {
             Statement statement = conn.createStatement();
             tableModel.getDataVector().removeAllElements();
 
-            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE user_id='"+Session.session.getSession()+"'");
+            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE id_user='"+Session.session.getSession()+"'");
             int i = 1;
             while(resultSet.next()){
                 Object[] data = {
                     i++,
-                    resultSet.getString("id_history"),
+                    resultSet.getString("id"),
                     resultSet.getString("list_barang"),
                     "Rp "+RupiahFromat(Integer.parseInt(resultSet.getString("total_tagihan"))),
                     resultSet.getString("tanggal")
@@ -87,7 +87,7 @@ public class History extends javax.swing.JFrame {
     public final void setProfilToko(){
         try {
             Connection conn = Koneksi.ConnectDB();
-            String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
+            String query = "SELECT * FROM tb_users WHERE id='"+Session.session.getSession()+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             String namaToko = "null";
@@ -452,7 +452,7 @@ public class History extends javax.swing.JFrame {
         // get id transaksi
         try {
             Connection conn = Koneksi.ConnectDB();
-            String query = "SELECT * FROM tb_history WHERE user_id='"+Session.session.getSession()+"' AND id_history='"+id_history+"'";
+            String query = "SELECT * FROM tb_history WHERE id_user='"+Session.session.getSession()+"' AND id='"+id_history+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             String idTransaksi = "";
@@ -463,7 +463,7 @@ public class History extends javax.swing.JFrame {
                 idTransaksi = rs.getString("id_transaksi");
                 totalBayar = rs.getString("total_tagihan");
                 jumlahUang = rs.getString("jumlah_uang");
-                kembalianUang = rs.getString("kembalian");
+                kembalianUang = rs.getString("kembalian_uang");
             }
             struk_TotalBayar.setText("Rp "+totalBayar);
             struk_JumlahUang.setText("Rp "+jumlahUang);
@@ -471,7 +471,7 @@ public class History extends javax.swing.JFrame {
             
             
             // get data transaksi
-            String qry = "SELECT * FROM tb_transaksi WHERE user_id='"+Session.session.getSession()+"' AND id_transaksi='"+idTransaksi+"' AND tanggal='"+tanggal+"'";
+            String qry = "SELECT * FROM tb_transaksi WHERE id_user='"+Session.session.getSession()+"' AND id_keranjang='"+idTransaksi+"' AND tanggal='"+tanggal+"'";
             Statement sst = conn.createStatement();
             ResultSet rrs = sst.executeQuery(qry);
             String jumlahRes = "";
@@ -530,12 +530,12 @@ public class History extends javax.swing.JFrame {
             Statement statement = conn.createStatement();
             tableModel.getDataVector().removeAllElements();
 
-            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE user_id='"+Session.session.getSession()+"' AND id_history LIKE '%"+inputTextCari+"%'");
+            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE id_user='"+Session.session.getSession()+"' AND id LIKE '%"+inputTextCari+"%'");
             int i = 1;
             while(resultSet.next()){
                 Object[] data = {
                     i++,
-                    resultSet.getString("id_history"),
+                    resultSet.getString("id"),
                     resultSet.getString("list_barang"),
                     "Rp "+RupiahFromat(Integer.parseInt(resultSet.getString("total_tagihan"))),
                     resultSet.getString("tanggal")
@@ -568,12 +568,12 @@ public class History extends javax.swing.JFrame {
             Statement statement = conn.createStatement();
             tableModel.getDataVector().removeAllElements();
 
-            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE user_id='"+Session.session.getSession()+"' AND tanggal='"+tanggal+"'");
+            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE id_user='"+Session.session.getSession()+"' AND tanggal='"+tanggal+"'");
             int i = 1;
             while(resultSet.next()){
                 Object[] data = {
                     i++,
-                    resultSet.getString("id_history"),
+                    resultSet.getString("id"),
                     resultSet.getString("list_barang"),
                     "Rp "+RupiahFromat(Integer.parseInt(resultSet.getString("total_tagihan"))),
                     resultSet.getString("tanggal")
@@ -596,12 +596,12 @@ public class History extends javax.swing.JFrame {
             Statement statement = conn.createStatement();
             tableModel.getDataVector().removeAllElements();
 
-            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE user_id='"+Session.session.getSession()+"' ORDER BY total_tagihan "+props+"");
+            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE id_user='"+Session.session.getSession()+"' ORDER BY total_tagihan "+props+"");
             int i = 1;
             while(resultSet.next()){
                 Object[] data = {
                     i++,
-                    resultSet.getString("id_history"),
+                    resultSet.getString("id"),
                     resultSet.getString("list_barang"),
                     "Rp "+RupiahFromat(Integer.parseInt(resultSet.getString("total_tagihan"))),
                     resultSet.getString("tanggal")
@@ -624,12 +624,12 @@ public class History extends javax.swing.JFrame {
             Statement statement = conn.createStatement();
             tableModel.getDataVector().removeAllElements();
 
-            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE user_id='"+Session.session.getSession()+"' ORDER BY tanggal "+props+"");
+            resultSet = statement.executeQuery("SELECT * FROM tb_history WHERE id_user='"+Session.session.getSession()+"' ORDER BY tanggal "+props+"");
             int i = 1;
             while(resultSet.next()){
                 Object[] data = {
                     i++,
-                    resultSet.getString("id_history"),
+                    resultSet.getString("id"),
                     resultSet.getString("list_barang"),
                     "Rp "+RupiahFromat(Integer.parseInt(resultSet.getString("total_tagihan"))),
                     resultSet.getString("tanggal")

@@ -39,7 +39,7 @@ public class Profile extends javax.swing.JFrame {
     public final void setProfilToko(){
         try {
             Connection conn = Koneksi.ConnectDB();
-            String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
+            String query = "SELECT * FROM tb_users WHERE id='"+Session.session.getSession()+"'";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             String namaToko = "null";
@@ -205,7 +205,7 @@ public class Profile extends javax.swing.JFrame {
             if(namaTokoBaru.length() >= 4){
                 try {
                     Connection conn = Koneksi.ConnectDB();
-                    String updt = "UPDATE `tb_users` SET `nama_toko`='"+namaTokoBaru+"' WHERE user_id='"+Session.session.getSession()+"'";
+                    String updt = "UPDATE `tb_users` SET `nama_toko`='"+namaTokoBaru+"' WHERE id='"+Session.session.getSession()+"'";
                     PreparedStatement preStmt = conn.prepareStatement(updt);
                     preStmt.execute();
                     JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nNama Toko berhasil diubah!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
@@ -233,7 +233,7 @@ public class Profile extends javax.swing.JFrame {
         if(!passwordLama.isEmpty() && !passwordLama.isBlank() && !passwordBaru.isEmpty() && !passwordBaru.isBlank()){
             try {
                 Connection conn = Koneksi.ConnectDB();
-                String query = "SELECT * FROM tb_users WHERE user_id='"+Session.session.getSession()+"'";
+                String query = "SELECT * FROM tb_users WHERE id='"+Session.session.getSession()+"'";
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery(query);
                 String password = "";
@@ -245,7 +245,7 @@ public class Profile extends javax.swing.JFrame {
                     if(passwordBaru.length() >= 4){
                         if(!passwordBaru.equals(passwordLama)){
                             try {
-                                String updt = "UPDATE `tb_users` SET `password`='"+passwordBaru+"' WHERE user_id='"+Session.session.getSession()+"'";
+                                String updt = "UPDATE `tb_users` SET `password`='"+passwordBaru+"' WHERE id='"+Session.session.getSession()+"'";
                                 PreparedStatement preStmt = conn.prepareStatement(updt);
                                 preStmt.execute();
                                 JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nNama Toko berhasil diubah!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
@@ -289,26 +289,26 @@ public class Profile extends javax.swing.JFrame {
         int Pilih = JOptionPane.showConfirmDialog(rootPane,"Yakin ingin hapus akun permanen?\n*semua data akan terhapus secara permanen","Konfirmasi",JOptionPane.OK_CANCEL_OPTION);
         if(Pilih == JOptionPane.OK_OPTION){
             System.out.println("oke");
-            // hapus data tb_barang
+            // hapus data user
             try {
                 Connection conn = Koneksi.ConnectDB();
-                String delet1 = "DELETE FROM `tb_barang` WHERE user_id='"+Session.session.getSession()+"'";
+                String delet1 = "DELETE FROM `tb_barang` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt1 = conn.prepareStatement(delet1);
                 preStmt1.execute();
                 
-                String delet2 = "DELETE FROM `tb_history` WHERE user_id='"+Session.session.getSession()+"'";
+                String delet2 = "DELETE FROM `tb_history` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt2 = conn.prepareStatement(delet2);
                 preStmt2.execute();
                 
-                String delet3 = "DELETE FROM `tb_keranjang` WHERE user_id='"+Session.session.getSession()+"'";
+                String delet3 = "DELETE FROM `tb_keranjang` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt3 = conn.prepareStatement(delet3);
                 preStmt3.execute();
                 
-                String delet4 = "DELETE FROM `tb_transaksi` WHERE user_id='"+Session.session.getSession()+"'";
+                String delet4 = "DELETE FROM `tb_transaksi` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt4 = conn.prepareStatement(delet4);
                 preStmt4.execute();
                 
-                String delet5 = "DELETE FROM `tb_users` WHERE user_id='"+Session.session.getSession()+"'";
+                String delet5 = "DELETE FROM `tb_users` WHERE id='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt5 = conn.prepareStatement(delet5);
                 preStmt5.execute();
                 

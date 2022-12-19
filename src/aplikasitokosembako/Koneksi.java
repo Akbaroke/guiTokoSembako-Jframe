@@ -4,7 +4,7 @@
  */
 package aplikasitokosembako;
 
-/**
+/**   
  *
  * @author akbaroke
  */
@@ -17,7 +17,7 @@ public class Koneksi {
     private static Connection connect;
     public static Connection ConnectDB() throws SQLException{
         try {
-            String DB = "jdbc:mysql://localhost/toko-sembako";
+            String DB = "jdbc:mysql://localhost/toko_sembako";
             String user = "root";   
             String pass = "";
             

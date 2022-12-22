@@ -355,6 +355,8 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         jLabel12.setText("Kode          :");
         getContentPane().add(jLabel12);
         jLabel12.setBounds(90, 830, 90, 20);
+
+        txtKode_Hapus.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         getContentPane().add(txtKode_Hapus);
         txtKode_Hapus.setBounds(180, 830, 150, 30);
 
@@ -1717,7 +1719,6 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                                 int selisih = Integer.parseInt(jumlah) - Integer.parseInt(jumlahKeranjang);
                                 if(Integer.parseInt(stokBarang) < selisih){
                                     JOptionPane.showMessageDialog(rootPane, "Oopss...\nStok barang tidak mencukupi jumlah yang ditambah ke keranjang!", "Gagal", JOptionPane.ERROR_MESSAGE);
-                                    System.out.println("a");
                                 }else{
                                     int hitung = Integer.parseInt(stokBarang) - selisih;
                                     String updt = "UPDATE `tb_barang` SET `stok`='"+hitung+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
@@ -1733,9 +1734,22 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                                 }
                             }else if(Integer.parseInt(jumlah) < Integer.parseInt(jumlahKeranjang)){
                                 int selisih = Integer.parseInt(jumlahKeranjang) - Integer.parseInt(jumlah);
-                                if(Integer.parseInt(stokBarang) > selisih){
-                                    JOptionPane.showMessageDialog(rootPane, "Oopss...\nStok barang tidak mencukupi jumlah yang ditambah ke keranjang!", "Gagal", JOptionPane.ERROR_MESSAGE);
-                                    System.out.println("b");
+                                if(Integer.parseInt(stokBarang) < selisih){
+                                    if(Integer.parseInt(stokBarang) == 0){
+                                        int hitung = Integer.parseInt(stokBarang) + selisih;
+                                        String updt = "UPDATE `tb_barang` SET `stok`='"+hitung+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";
+                                        PreparedStatement preSt = conn.prepareStatement(updt);
+                                        preSt.execute();
+
+                                        String insrt = "UPDATE `tb_keranjang` SET `jumlah`='"+jumlah+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode_barang`='"+kode+"'";
+                                        PreparedStatement preStmt = conn.prepareStatement(insrt);
+                                        preStmt.execute();
+                                        JOptionPane.showMessageDialog(rootPane, "Berhasil.. \nKeranjang berhasil diubah!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+                                        RefreshTampilanTransaksi();
+                                        RefreshTampilanAdmin();
+                                    }else{
+                                        JOptionPane.showMessageDialog(rootPane, "Oopss...\nStok barang tidak mencukupi jumlah yang ditambah ke keranjang!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                                    }
                                 }else{
                                     int hitung = Integer.parseInt(stokBarang) + selisih;
                                     String updt = "UPDATE `tb_barang` SET `stok`='"+hitung+"' WHERE id_user='"+Session.session.getSession()+"' AND `kode`='"+kode+"'";

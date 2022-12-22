@@ -1385,29 +1385,29 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         
         try {
             if(!kode.isEmpty() && !kode.isBlank() && !jumlah.isEmpty() && !jumlah.isBlank()){
-                Connection conn = Koneksi.ConnectDB();
-                String query = "SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kode='"+kode+"'";
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(query);
-                String resKode = null;
-                String resNama = null;
-                String resHarga = null;
-                int resStok = 0;
-                while(rs.next()){
-                    resKode = rs.getString("kode");
-                    resNama = rs.getString("nama");
-                    resHarga = rs.getString("harga");
-                    resStok = Integer.parseInt(rs.getString("stok"));
-                }
-                
-                if(resKode == null){
-                    JOptionPane.showMessageDialog(rootPane, "Oopss...\nBarang belum terdaftar!", "Gagal", JOptionPane.ERROR_MESSAGE);
-                }else{
-                    if(resStok > 0){
-                        if(Integer.parseInt(jumlah) > resStok){
-                            JOptionPane.showMessageDialog(rootPane, "Oopss...\nJumlah melebihi stok barang!", "Gagal", JOptionPane.ERROR_MESSAGE);
-                        }else{
-                            if(jumlah.matches("\\d+")){
+                if(jumlah.matches("\\d+")){
+                    Connection conn = Koneksi.ConnectDB();
+                    String query = "SELECT * FROM tb_barang WHERE id_user='"+Session.session.getSession()+"' AND kode='"+kode+"'";
+                    Statement st = conn.createStatement();
+                    ResultSet rs = st.executeQuery(query);
+                    String resKode = null;
+                    String resNama = null;
+                    String resHarga = null;
+                    int resStok = 0;
+                    while(rs.next()){
+                        resKode = rs.getString("kode");
+                        resNama = rs.getString("nama");
+                        resHarga = rs.getString("harga");
+                        resStok = Integer.parseInt(rs.getString("stok"));
+                    }
+
+                    if(resKode == null){
+                        JOptionPane.showMessageDialog(rootPane, "Oopss...\nBarang belum terdaftar!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                    }else{
+                        if(resStok > 0){
+                            if(Integer.parseInt(jumlah) > resStok){
+                                JOptionPane.showMessageDialog(rootPane, "Oopss...\nJumlah melebihi stok barang!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                            }else{
                                 String queryy = "SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"' AND kode_barang='"+resKode+"'";
                                 Statement stt = conn.createStatement();
                                 ResultSet rss = stt.executeQuery(queryy);
@@ -1455,14 +1455,15 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
                                 }else{
                                     JOptionPane.showMessageDialog(rootPane, "Oopss...\nJumlah min.1", "Gagal", JOptionPane.ERROR_MESSAGE);
                                 }
-                            }else{
-                                JOptionPane.showMessageDialog(rootPane, "Oopss...\nJumlah hanya boleh berupa Angka!", "Gagal", JOptionPane.ERROR_MESSAGE);
                             }
+                        }else{
+                            JOptionPane.showMessageDialog(rootPane, "Oopss...\nStok barang telah Habis!", "Gagal", JOptionPane.ERROR_MESSAGE);
                         }
-                    }else{
-                        JOptionPane.showMessageDialog(rootPane, "Oopss...\nStok barang telah Habis!", "Gagal", JOptionPane.ERROR_MESSAGE);
                     }
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Oopss...\nJumlah hanya boleh berupa Angka!", "Gagal", JOptionPane.ERROR_MESSAGE);
                 }
+                
             }else{
                 JOptionPane.showMessageDialog(rootPane, "Oopss...\nData harus diisi dengan benar!", "Gagal", JOptionPane.ERROR_MESSAGE);
             }

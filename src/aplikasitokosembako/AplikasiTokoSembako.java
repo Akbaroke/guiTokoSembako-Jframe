@@ -1584,98 +1584,113 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         // TODO add your handling code here:
         String uang = txtJumlahUang_Bayar.getText();
         if(!uang.isEmpty() && !uang.isBlank()){
-            if (uang.matches("\\d+")) {
-                if(Integer.parseInt(uang) >= KeranjangTotalBayar){
-                    lblRingkasan_Total.setText(RupiahFromat(KeranjangTotalBayar));
-                    lblRingkasan_Uang.setText(RupiahFromat(Integer.parseInt(uang)));
-                    int kembalian = Integer.parseInt(uang)-KeranjangTotalBayar;
-                    lblRingkasan_Kembalian.setText(RupiahFromat(kembalian));
-                    txtJumlahUang_Bayar.setText("");
-                    totalKeranjang.setText("0");
-                    totalKeranjang_Pembayaran.setText("0");
-                    try {
-                        Connection conn = Koneksi.ConnectDB();
-                        
-                        String qrry = "SELECT * FROM tb_transaksi WHERE id_user='"+Session.session.getSession()+"'";
-                        Statement st = conn.createStatement();
-                        ResultSet rs = st.executeQuery(qrry);
-                        int count = 0;
-                        while(rs.next()){
-                            idTransaksi = rs.getString("id");
-                            count ++;
-                        }
-                        
-                        if(count == 0){
-                            idTransaksi = "1";
-                        }else{
-                            int setId = Integer.parseInt(idTransaksi) + 1;
-                            idTransaksi = Integer.toString(setId);
-                        }
-                        
-                        String qry = "SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"'";
-                        Statement sst = conn.createStatement();
-                        ResultSet rrs = sst.executeQuery(qry);
-                        int JumlahBarang = 0;
-                        String ListBarang = "";
-                        while(rrs.next()){
-                            String nama = rrs.getString("nama");
-                            String harga = rrs.getString("harga");
-                            String jumlah = rrs.getString("jumlah");
-                            if(JumlahBarang == 0){
-                                ListBarang += nama;
-                            }else{
-                                ListBarang += ","+nama;
-                            }
-                            JumlahBarang += Integer.parseInt(jumlah);
-                            String tanggal = getTanggal();
-                            String insrt = "INSERT INTO `tb_transaksi` (`id_keranjang`, `id_user`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES ('"+idTransaksi+"','"+Session.session.getSession()+"','"+nama+"','"+jumlah+"','"+harga+"','"+tanggal+"')";
-                            PreparedStatement prs = conn.prepareStatement(insrt);
-                            prs.execute();
-                        }
-                        
-                        String delete = "DELETE FROM `tb_keranjang` WHERE id_user='"+Session.session.getSession()+"'";
-                        PreparedStatement prs = conn.prepareStatement(delete);
-                        prs.execute();
-                        
-                        String qr = "SELECT * FROM `tb_users` WHERE id='"+Session.session.getSession()+"'";
-                        Statement stt = conn.createStatement();
-                        ResultSet rss = stt.executeQuery(qr);
-                        String pendapatan = "0";
-                        while(rss.next()){
-                            pendapatan = rss.getString("pendapatan");
-                        }
-                        String totalBayar = lblRingkasan_Total.getText().replace(".", "");
-                        int totalPen = Integer.parseInt(pendapatan) + Integer.parseInt(totalBayar);
-                        String updt = "UPDATE `tb_users` SET `pendapatan`='"+totalPen+"' WHERE id='"+Session.session.getSession()+"'";
-                        PreparedStatement pr = conn.prepareStatement(updt);
-                        pr.execute();
-                        
-                        
-                        
-                        // => generate Id histori <=
-                        String id_transaksi = "";
-                        id_transaksi += idTransaksi;
-                        id_transaksi += Session.session.getSession();
-                        id_transaksi += JumlahBarang;
-                        id_transaksi += getTanggal();
-                        id_transaksi = id_transaksi.replace("/", "");
-                        
-                        // insert history
-                        String insHistory = "INSERT INTO `tb_history`(`id`, `id_transaksi`, `id_user`, `list_barang`, `jumlah_barang`, `total_tagihan`, `jumlah_uang`, `kembalian_uang`, `tanggal`) VALUES ('"+id_transaksi+"','"+idTransaksi+"','"+Session.session.getSession()+"','"+ListBarang+"','"+JumlahBarang+"','"+KeranjangTotalBayar+"','"+uang+"','"+kembalian+"','"+getTanggal()+"')";
-                        PreparedStatement pre = conn.prepareStatement(insHistory);
-                        pre.execute();
-                        
-                        
-                        JOptionPane.showMessageDialog(rootPane, "Berhasil... \nPembayaran Berhasil\nKeranjang akan dikosongkan!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
-                        
-                    } catch (SQLException e) {
-                        JOptionPane.showMessageDialog(rootPane, "Oopss...\nPermintaan ditolak!", "Gagal", JOptionPane.ERROR_MESSAGE);
-                        System.out.println(e);
+            if (uang.matches("\\d+")) {   
+                try {
+                    Connection conn = Koneksi.ConnectDB();
+                    String qrry = "SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"'";
+                    Statement st = conn.createStatement();
+                    ResultSet rs = st.executeQuery(qrry);
+                    int banyakItemKeranjang = 0;
+                    while(rs.next()){
+                        banyakItemKeranjang ++;
                     }
-                    showTabelKeranjang();
+                    if(banyakItemKeranjang == 0){
+                        JOptionPane.showMessageDialog(rootPane, "Oopss...\nKeranjang masih kosong!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                    }else{
+                        if(Integer.parseInt(uang) >= KeranjangTotalBayar){
+                            lblRingkasan_Total.setText(RupiahFromat(KeranjangTotalBayar));
+                            lblRingkasan_Uang.setText(RupiahFromat(Integer.parseInt(uang)));
+                            int kembalian = Integer.parseInt(uang)-KeranjangTotalBayar;
+                            lblRingkasan_Kembalian.setText(RupiahFromat(kembalian));
+                            txtJumlahUang_Bayar.setText("");
+                            totalKeranjang.setText("0");
+                            totalKeranjang_Pembayaran.setText("0");
+                            try {
+                                String qrryy = "SELECT * FROM tb_transaksi WHERE id_user='"+Session.session.getSession()+"'";
+                                Statement stt = conn.createStatement();
+                                ResultSet rss = stt.executeQuery(qrryy);
+                                int count = 0;
+                                while(rss.next()){
+                                    idTransaksi = rss.getString("id");
+                                    count ++;
+                                }
 
-                }else{
-                    JOptionPane.showMessageDialog(rootPane, "Oopss...\nUang Tidak cukup untuk membayar!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                                if(count == 0){
+                                    idTransaksi = "1";
+                                }else{
+                                    int setId = Integer.parseInt(idTransaksi) + 1;
+                                    idTransaksi = Integer.toString(setId);
+                                }
+
+                                String qry = "SELECT * FROM tb_keranjang WHERE id_user='"+Session.session.getSession()+"'";
+                                Statement sst = conn.createStatement();
+                                ResultSet rrs = sst.executeQuery(qry);
+                                int JumlahBarang = 0;
+                                String ListBarang = "";
+                                while(rrs.next()){
+                                    String nama = rrs.getString("nama");
+                                    String harga = rrs.getString("harga");
+                                    String jumlah = rrs.getString("jumlah");
+                                    if(JumlahBarang == 0){
+                                        ListBarang += nama;
+                                    }else{
+                                        ListBarang += ","+nama;
+                                    }
+                                    JumlahBarang += Integer.parseInt(jumlah);
+                                    String tanggal = getTanggal();
+                                    String insrt = "INSERT INTO `tb_transaksi` (`id_keranjang`, `id_user`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES ('"+idTransaksi+"','"+Session.session.getSession()+"','"+nama+"','"+jumlah+"','"+harga+"','"+tanggal+"')";
+                                    PreparedStatement prs = conn.prepareStatement(insrt);
+                                    prs.execute();
+                                }
+
+
+                                String delete = "DELETE FROM `tb_keranjang` WHERE id_user='"+Session.session.getSession()+"'";
+                                PreparedStatement prs = conn.prepareStatement(delete);
+                                prs.execute();
+
+                                String qr = "SELECT * FROM `tb_users` WHERE id='"+Session.session.getSession()+"'";
+                                Statement sstt = conn.createStatement();
+                                ResultSet rrss = sstt.executeQuery(qr);
+                                String pendapatan = "0";
+                                while(rrss.next()){
+                                    pendapatan = rrss.getString("pendapatan");
+                                }
+                                String totalBayar = lblRingkasan_Total.getText().replace(".", "");
+                                int totalPen = Integer.parseInt(pendapatan) + Integer.parseInt(totalBayar);
+                                String updt = "UPDATE `tb_users` SET `pendapatan`='"+totalPen+"' WHERE id='"+Session.session.getSession()+"'";
+                                PreparedStatement pr = conn.prepareStatement(updt);
+                                pr.execute();
+
+
+
+                                // => generate Id histori <=
+                                String id_transaksi = "";
+                                id_transaksi += idTransaksi;
+                                id_transaksi += Session.session.getSession();
+                                id_transaksi += JumlahBarang;
+                                id_transaksi += getTanggal();
+                                id_transaksi = id_transaksi.replace("/", "");
+
+                                // insert history
+                                String insHistory = "INSERT INTO `tb_history`(`id`, `id_transaksi`, `id_user`, `list_barang`, `jumlah_barang`, `total_tagihan`, `jumlah_uang`, `kembalian_uang`, `tanggal`) VALUES ('"+id_transaksi+"','"+idTransaksi+"','"+Session.session.getSession()+"','"+ListBarang+"','"+JumlahBarang+"','"+KeranjangTotalBayar+"','"+uang+"','"+kembalian+"','"+getTanggal()+"')";
+                                PreparedStatement pre = conn.prepareStatement(insHistory);
+                                pre.execute();
+
+
+                                JOptionPane.showMessageDialog(rootPane, "Berhasil... \nPembayaran Berhasil\nKeranjang akan dikosongkan!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+
+                            } catch (SQLException e) {
+                                JOptionPane.showMessageDialog(rootPane, "Oopss...\nPermintaan ditolak!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                                System.out.println(e);
+                            }
+                            showTabelKeranjang();
+
+                        }else{
+                            JOptionPane.showMessageDialog(rootPane, "Oopss...\nUang Tidak cukup untuk membayar!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } catch (SQLException e) {
+                    
                 }
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Oopss...\nHarga hanya boleh berupa Angka!", "Gagal", JOptionPane.ERROR_MESSAGE);

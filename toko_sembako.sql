@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Des 2022 pada 15.42
+-- Waktu pembuatan: 24 Des 2022 pada 18.04
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tb_barang` (
+  `id` int(11) NOT NULL,
   `kode` varchar(100) NOT NULL,
   `id_user` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
@@ -40,14 +41,22 @@ CREATE TABLE `tb_barang` (
 -- Dumping data untuk tabel `tb_barang`
 --
 
-INSERT INTO `tb_barang` (`kode`, `id_user`, `nama`, `harga`, `stok`, `kategori`) VALUES
-('1LA', 3, 'obat nyamuk', 6000, 19, 'Lain-lain'),
-('1MA', 3, 'sari roti', 7500, 9, 'Makanan'),
-('1MI', 3, 'coca cola', 5000, 20, 'Minuman'),
-('2MI', 3, 'aqua', 3000, 29, 'Minuman'),
-('1MA', 5, 'Indomie', 3500, 21, 'Makanan'),
-('2MA', 5, 'roti tawar', 5000, 17, 'Makanan'),
-('1LA', 5, 'korek gas', 2500, 28, 'Lain-lain');
+INSERT INTO `tb_barang` (`id`, `kode`, `id_user`, `nama`, `harga`, `stok`, `kategori`) VALUES
+(11, '1MI', 8, 'Sprite', 5000, 29, 'Minuman'),
+(12, '2MI', 8, 'Fanta', 5000, 30, 'Minuman'),
+(13, '3MI', 8, 'Cocacola', 5000, 30, 'Minuman'),
+(14, '4MI', 8, 'Ademsari', 8000, 30, 'Minuman'),
+(15, '5MI', 8, 'Indomilk', 3000, 30, 'Minuman'),
+(16, '1MA', 8, 'Coklatos', 1000, 30, 'Makanan'),
+(17, '2MA', 8, 'Indomie Goreng', 3500, 30, 'Makanan'),
+(18, '3MA', 8, 'Indomie Rebus', 3000, 30, 'Makanan'),
+(19, '4MA', 8, 'Donat', 3000, 28, 'Makanan'),
+(20, '5MA', 8, 'Roti', 3000, 30, 'Makanan'),
+(21, '1LA', 8, 'Tisu Wajah', 10000, 30, 'Lain-lain'),
+(22, '2LA', 8, 'Tisu Toilet', 7000, 30, 'Lain-lain'),
+(23, '3LA', 8, 'Handsanitizer', 12000, 30, 'Lain-lain'),
+(24, '4LA', 8, 'Pewangi Lantai', 3000, 30, 'Lain-lain'),
+(25, '5LA', 8, 'Gas 3kg', 26000, 10, 'Lain-lain');
 
 -- --------------------------------------------------------
 
@@ -66,14 +75,6 @@ CREATE TABLE `tb_history` (
   `kembalian_uang` int(11) NOT NULL,
   `tanggal` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_history`
---
-
-INSERT INTO `tb_history` (`id`, `id_transaksi`, `id_user`, `list_barang`, `jumlah_barang`, `total_tagihan`, `jumlah_uang`, `kembalian_uang`, `tanggal`) VALUES
-('15219122022', 1, 5, 'Indomie', 2, 7000, 8000, 1000, '19/12/2022'),
-('55719122022', 5, 5, 'korek gas,Indomie,roti tawar', 7, 27000, 30000, 3000, '19/12/2022');
 
 -- --------------------------------------------------------
 
@@ -106,16 +107,6 @@ CREATE TABLE `tb_transaksi` (
   `tanggal` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `tb_transaksi`
---
-
-INSERT INTO `tb_transaksi` (`id`, `id_keranjang`, `id_user`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES
-(4, 1, 5, 'Indomie', 2, 3500, '19/12/2022'),
-(5, 5, 5, 'korek gas', 2, 2500, '19/12/2022'),
-(6, 5, 5, 'Indomie', 2, 3500, '19/12/2022'),
-(7, 5, 5, 'roti tawar', 3, 5000, '19/12/2022');
-
 -- --------------------------------------------------------
 
 --
@@ -135,8 +126,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`id`, `nama_toko`, `username`, `password`, `pendapatan`) VALUES
-(3, 'Akbar Store', 'akbar', 'akbar123', '16500'),
-(5, 'Argun Store', 'argun', 'argun123', '34000');
+(8, 'Akbar Store', 'akbar', 'akbar123', '11000');
 
 --
 -- Indexes for dumped tables
@@ -146,6 +136,7 @@ INSERT INTO `tb_users` (`id`, `nama_toko`, `username`, `password`, `pendapatan`)
 -- Indeks untuk tabel `tb_barang`
 --
 ALTER TABLE `tb_barang`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`),
   ADD KEY `kode` (`kode`);
 
@@ -184,22 +175,28 @@ ALTER TABLE `tb_users`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_barang`
+--
+ALTER TABLE `tb_barang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

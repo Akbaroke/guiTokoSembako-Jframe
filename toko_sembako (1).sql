@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Des 2022 pada 14.05
+-- Waktu pembuatan: 25 Des 2022 pada 14.29
 -- Versi server: 10.4.25-MariaDB
 -- Versi PHP: 8.1.10
 
@@ -123,9 +123,7 @@ INSERT INTO `tb_transaksi` (`id`, `id_keranjang`, `id_user`, `nama`, `jumlah`, `
 (18, 1, 8, 'Sprite', 1, 5000, '25/12/2022'),
 (19, 1, 8, 'Cocacola', 1, 5000, '25/12/2022'),
 (20, 20, 8, 'Tisu Wajah', 2, 10000, '25/12/2022'),
-(21, 20, 8, 'Ademsari', 1, 8000, '25/12/2022'),
-(22, 1, 13, 'Sprite', 1, 5000, '25/12/2022'),
-(23, 23, 13, 'Sprite', 1, 5000, '25/12/2022');
+(21, 20, 8, 'Ademsari', 1, 8000, '25/12/2022');
 
 -- --------------------------------------------------------
 
@@ -146,8 +144,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`id`, `nama_toko`, `username`, `password`, `pendapatan`) VALUES
-(8, 'Akbar Store', 'akbar', 'akbar123', '38000'),
-(13, 'Joko Store', 'joko', 'joko123', '10000');
+(8, 'Akbar Store', 'akbar', 'akbar123', '38000');
 
 --
 -- Indexes for dumped tables
@@ -199,25 +196,25 @@ ALTER TABLE `tb_users`
 -- AUTO_INCREMENT untuk tabel `tb_barang`
 --
 ALTER TABLE `tb_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -233,8 +230,7 @@ ALTER TABLE `tb_barang`
 -- Ketidakleluasaan untuk tabel `tb_history`
 --
 ALTER TABLE `tb_history`
-  ADD CONSTRAINT `tb_history_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `tb_users` (`id`),
-  ADD CONSTRAINT `tb_history_ibfk_3` FOREIGN KEY (`id_transaksi`) REFERENCES `tb_transaksi` (`id_keranjang`);
+  ADD CONSTRAINT `tb_history_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `tb_users` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `tb_keranjang`

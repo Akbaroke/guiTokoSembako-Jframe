@@ -291,15 +291,15 @@ public class Profile extends javax.swing.JFrame {
             // hapus data user
             try {
                 Connection conn = Koneksi.ConnectDB();
-                String delet1 = "DELETE FROM `tb_history` WHERE id_user='"+Session.session.getSession()+"'";
+                String delet1 = "DELETE FROM `tb_keranjang` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt1 = conn.prepareStatement(delet1);
                 preStmt1.execute();
                 
-                String delet2 = "DELETE FROM `tb_transaksi` WHERE id_user='"+Session.session.getSession()+"'";
+                String delet2 = "DELETE FROM `tb_history` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt2 = conn.prepareStatement(delet2);
                 preStmt2.execute();
                 
-                String delet3 = "DELETE FROM `tb_keranjang` WHERE id_user='"+Session.session.getSession()+"'";
+                String delet3 = "DELETE FROM `tb_transaksi` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt3 = conn.prepareStatement(delet3);
                 preStmt3.execute();
                 

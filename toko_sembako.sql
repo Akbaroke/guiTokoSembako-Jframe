@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Des 2022 pada 18.04
+-- Waktu pembuatan: 25 Des 2022 pada 11.42
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -42,17 +42,17 @@ CREATE TABLE `tb_barang` (
 --
 
 INSERT INTO `tb_barang` (`id`, `kode`, `id_user`, `nama`, `harga`, `stok`, `kategori`) VALUES
-(11, '1MI', 8, 'Sprite', 5000, 29, 'Minuman'),
+(11, '1MI', 8, 'Sprite', 5000, 28, 'Minuman'),
 (12, '2MI', 8, 'Fanta', 5000, 30, 'Minuman'),
-(13, '3MI', 8, 'Cocacola', 5000, 30, 'Minuman'),
-(14, '4MI', 8, 'Ademsari', 8000, 30, 'Minuman'),
+(13, '3MI', 8, 'Cocacola', 5000, 29, 'Minuman'),
+(14, '4MI', 8, 'Ademsari', 8000, 29, 'Minuman'),
 (15, '5MI', 8, 'Indomilk', 3000, 30, 'Minuman'),
 (16, '1MA', 8, 'Coklatos', 1000, 30, 'Makanan'),
 (17, '2MA', 8, 'Indomie Goreng', 3500, 30, 'Makanan'),
 (18, '3MA', 8, 'Indomie Rebus', 3000, 30, 'Makanan'),
 (19, '4MA', 8, 'Donat', 3000, 28, 'Makanan'),
 (20, '5MA', 8, 'Roti', 3000, 30, 'Makanan'),
-(21, '1LA', 8, 'Tisu Wajah', 10000, 30, 'Lain-lain'),
+(21, '1LA', 8, 'Tisu Wajah', 10000, 28, 'Lain-lain'),
 (22, '2LA', 8, 'Tisu Toilet', 7000, 30, 'Lain-lain'),
 (23, '3LA', 8, 'Handsanitizer', 12000, 30, 'Lain-lain'),
 (24, '4LA', 8, 'Pewangi Lantai', 3000, 30, 'Lain-lain'),
@@ -75,6 +75,14 @@ CREATE TABLE `tb_history` (
   `kembalian_uang` int(11) NOT NULL,
   `tanggal` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_history`
+--
+
+INSERT INTO `tb_history` (`id`, `id_transaksi`, `id_user`, `list_barang`, `jumlah_barang`, `total_tagihan`, `jumlah_uang`, `kembalian_uang`, `tanggal`) VALUES
+('18225122022', 1, 8, 'Sprite,Cocacola', 2, 10000, 10000, 0, '25/12/2022'),
+('208325122022', 20, 8, 'Tisu Wajah,Ademsari', 3, 28000, 30000, 2000, '25/12/2022');
 
 -- --------------------------------------------------------
 
@@ -107,6 +115,16 @@ CREATE TABLE `tb_transaksi` (
   `tanggal` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tb_transaksi`
+--
+
+INSERT INTO `tb_transaksi` (`id`, `id_keranjang`, `id_user`, `nama`, `jumlah`, `harga`, `tanggal`) VALUES
+(18, 1, 8, 'Sprite', 1, 5000, '25/12/2022'),
+(19, 1, 8, 'Cocacola', 1, 5000, '25/12/2022'),
+(20, 20, 8, 'Tisu Wajah', 2, 10000, '25/12/2022'),
+(21, 20, 8, 'Ademsari', 1, 8000, '25/12/2022');
+
 -- --------------------------------------------------------
 
 --
@@ -126,7 +144,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`id`, `nama_toko`, `username`, `password`, `pendapatan`) VALUES
-(8, 'Akbar Store', 'akbar', 'akbar123', '11000');
+(8, 'Akbar Store', 'akbar', 'akbar123', '38000');
 
 --
 -- Indexes for dumped tables
@@ -178,25 +196,25 @@ ALTER TABLE `tb_users`
 -- AUTO_INCREMENT untuk tabel `tb_barang`
 --
 ALTER TABLE `tb_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

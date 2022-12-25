@@ -465,9 +465,9 @@ public class History extends javax.swing.JFrame {
                 jumlahUang = rs.getString("jumlah_uang");
                 kembalianUang = rs.getString("kembalian_uang");
             }
-            struk_TotalBayar.setText("Rp "+totalBayar);
-            struk_JumlahUang.setText("Rp "+jumlahUang);
-            struk_KembalianUang.setText("Rp "+kembalianUang);
+            struk_TotalBayar.setText("Rp "+RupiahFromat(Integer.parseInt(totalBayar)));
+            struk_JumlahUang.setText("Rp "+RupiahFromat(Integer.parseInt(jumlahUang)));
+            struk_KembalianUang.setText("Rp "+RupiahFromat(Integer.parseInt(kembalianUang)));
             
             
             // get data transaksi

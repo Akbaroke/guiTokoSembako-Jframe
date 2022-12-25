@@ -393,7 +393,7 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
             }
         });
         getContentPane().add(FilterTabel);
-        FilterTabel.setBounds(180, 360, 120, 30);
+        FilterTabel.setBounds(180, 360, 150, 30);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));

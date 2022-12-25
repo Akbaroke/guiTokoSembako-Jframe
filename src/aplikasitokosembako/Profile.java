@@ -295,15 +295,15 @@ public class Profile extends javax.swing.JFrame {
                 PreparedStatement preStmt1 = conn.prepareStatement(delet1);
                 preStmt1.execute();
                 
-                String delet2 = "DELETE FROM `tb_history` WHERE id_user='"+Session.session.getSession()+"'";
+                String delet2 = "DELETE FROM `tb_transaksi` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt2 = conn.prepareStatement(delet2);
                 preStmt2.execute();
                 
-                String delet3 = "DELETE FROM `tb_transaksi` WHERE id_user='"+Session.session.getSession()+"'";
+                String delet3 = "DELETE FROM `tb_barang` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt3 = conn.prepareStatement(delet3);
                 preStmt3.execute();
                 
-                String delet4 = "DELETE FROM `tb_barang` WHERE id_user='"+Session.session.getSession()+"'";
+                String delet4 = "DELETE FROM `tb_history` WHERE id_user='"+Session.session.getSession()+"'";
                 PreparedStatement preStmt4 = conn.prepareStatement(delet4);
                 preStmt4.execute();
                 

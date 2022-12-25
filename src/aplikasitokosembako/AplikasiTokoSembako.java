@@ -279,7 +279,6 @@ public class AplikasiTokoSembako extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("APLIKASI TOKO SEMBAKO");
         setBackground(new java.awt.Color(0, 0, 0));
-        setMaximumSize(new java.awt.Dimension(1440, 960));
         setMinimumSize(new java.awt.Dimension(1440, 960));
         getContentPane().setLayout(null);
 

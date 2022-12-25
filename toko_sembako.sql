@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Des 2022 pada 11.42
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 7.4.29
+-- Waktu pembuatan: 25 Des 2022 pada 14.05
+-- Versi server: 10.4.25-MariaDB
+-- Versi PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -123,7 +123,9 @@ INSERT INTO `tb_transaksi` (`id`, `id_keranjang`, `id_user`, `nama`, `jumlah`, `
 (18, 1, 8, 'Sprite', 1, 5000, '25/12/2022'),
 (19, 1, 8, 'Cocacola', 1, 5000, '25/12/2022'),
 (20, 20, 8, 'Tisu Wajah', 2, 10000, '25/12/2022'),
-(21, 20, 8, 'Ademsari', 1, 8000, '25/12/2022');
+(21, 20, 8, 'Ademsari', 1, 8000, '25/12/2022'),
+(22, 1, 13, 'Sprite', 1, 5000, '25/12/2022'),
+(23, 23, 13, 'Sprite', 1, 5000, '25/12/2022');
 
 -- --------------------------------------------------------
 
@@ -144,7 +146,8 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`id`, `nama_toko`, `username`, `password`, `pendapatan`) VALUES
-(8, 'Akbar Store', 'akbar', 'akbar123', '38000');
+(8, 'Akbar Store', 'akbar', 'akbar123', '38000'),
+(13, 'Joko Store', 'joko', 'joko123', '10000');
 
 --
 -- Indexes for dumped tables
@@ -196,25 +199,25 @@ ALTER TABLE `tb_users`
 -- AUTO_INCREMENT untuk tabel `tb_barang`
 --
 ALTER TABLE `tb_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_keranjang`
 --
 ALTER TABLE `tb_keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

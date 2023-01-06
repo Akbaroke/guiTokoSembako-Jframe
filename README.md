@@ -43,4 +43,20 @@ Untuk membuka file utama dan membuka Jframe dan Java Class. <br>
     ↳ Session.java
 ```
 
-![Home](https://user-images.githubusercontent.com/94231436/207862566-7f741d6c-c2fc-4832-a3b6-de789d4a3b10.JPG)
+### ***Home Page***
+![Home](https://cdn.discordapp.com/attachments/1015028360759492710/1060866670882725960/Home.JPG)
+
+### ***Login Page***
+![Login](https://cdn.discordapp.com/attachments/1015028360759492710/1060866698376396840/Login.JPG)
+
+### ***Register Page***
+![Register](https://cdn.discordapp.com/attachments/1015028360759492710/1060866734191550466/Register.JPG)
+
+### ***Profile Page***
+![Profile](https://cdn.discordapp.com/attachments/1015028360759492710/1060866726746664960/Profile.JPG)
+
+### ***History Page***
+![History](https://cdn.discordapp.com/attachments/1015028360759492710/1060866741829374002/History.JPG)
+
+### ***Design DataBase Page***
+![DesignDB](https://cdn.discordapp.com/attachments/1015028360759492710/1060866804098011176/desain_relasi_tabel.JPG)
